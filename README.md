@@ -1,15 +1,15 @@
 # NEXT.JS
 
-## Next.JS nedir?
+## NEXT.JS NEDİR?
 
 - React'ın üzerine inşa edilmiş bir meta çerçevedir. Yani react çerçeve olarak düşünülürse Next.js de bu çerçeveyi çerçeveleyen bir çerçevedir.
 - Next.js'in kendine özgü kuralları vardır ve bu kurallara göre geliştirme yapılmalıdır.Böylece fazla şablon oluşturmaktan kaçınmış oluruz. Tüm ekip aynı kuralla uygulama geliştirdiğinden anlaşılabilirlik ve ekip olarak çalışma da kolaylaşmış olur ve proje hızlı bir şekilde tamamlanır.
 - Sunucudan veri alma ve veri mutasyonlarıyla birlikte karmaşık tam yığın web uygulamaları ve siteleri oluşturmamızı sağlar.
 - React sunucu bileşenleri (RSC) bir frameworke entegre edilmeden (Next.js) kullanımı neredeyse imkansız olan server actions, suspense ve çok daha fazlası gibi tüm son teknoloji react özelliklerini uygular.Tüm bu parçalar react ekibinin tam yığın mimari vizyonunun bir parçasıdır ve yine Next.js gibi bir çerçeve tarafından uygulanması gerekir
 
-## CSR(Client Side Rendering) AND SSR (Server Side Rendering)
+## CSR(Client Side Rendering) VE SSR (Server Side Rendering)
 
-### CSR:
+### CSR
 
 - JS kullanarak html, client da oluşturulur.(Kullanıcının bilgisayarında-istemci)
 - İlk sayfa yüklemeleri yavaştır. Çünkü uygulamayı oluşturmak için gerekli js paketi büyük olabilir ve sayfada bir şey gerçekleşmeden tamamen inmesi gerekir.
@@ -19,7 +19,7 @@
 - Tek sayfa uygulamaları oluşturmak için kullanılmalıdır (SPAs).
 - Seo nun önemli olmadığı yani bir giriş arkasında ve herkes tarafından erişilebilir olmayan uygulamalarda kullanılmalıdır. Örneğin şirket içinde kullanılan uygulamalar.
 
-### SSR:
+### SSR
 
 - Html web server da oluşturulur (Geliştiricinin bilgisayarında). Örneğin wordpress, php, Next.js.
 - İlk sayfa yüklemesi daha hızlıdır. Bunun nedeni uygulamayı çalıştırmak için js paketine pek ihtiyaç duyulmamasıdır.
@@ -28,11 +28,9 @@
 - SEO ile arkadaş canlısıdır. Önceden oluşturulmuş içerik, google vb. arama motorları tarafından çok daha kolay indexlenebiliyor.
 - İçerik odaklı web siteler veya uygulamalar için kullanılmalıdır. Örneğin e-ticaret platformları, bloglar, haberler, satış siteleri vs.
 - 2 tip SSR vardır:
-  - 1. Static: HTML derleme zamanında oluşturulur (built yaptığımızda). Yani geliştirici projeyi geliştirmeyi bitirdiğinde siteyi statik html, css, js dosyalarına aktarır ve bunlar daha sonra bir web sunucusuna dağıtılabilir. Ancak bu web sunucusu işaretlemeyi her zaman yeniden oluşturmayacaktır. Başlangıçta geliştirici tarafından bir kez üretilmiş olanı gönderecektir.
-  - 2. Dynamic: Sunucuya her istek geldiğinde sunucunun gerçekten yeni HTML ürettiği dinamik görüntülemeye sahibiz. Yani temelde her kullanıcı için yeni sayfalar oluşturacaktır.Bu da altta kalan veriler sık sık değiştiğinde harikadır.
 
-<!-- HER SENARYODA BİR WEB SAYFASININ NASIL OLUŞTURULDUĞUNA DAİR ZAMAN ÇİZELGESİ: -->
-<!-- foto (SSR VS CSR) -->
+  - Static: HTML derleme zamanında oluşturulur (built yaptığımızda). Yani geliştirici projeyi geliştirmeyi bitirdiğinde siteyi statik html, css, js dosyalarına aktarır ve bunlar daha sonra bir web sunucusuna dağıtılabilir. Ancak bu web sunucusu işaretlemeyi her zaman yeniden oluşturmayacaktır. Başlangıçta geliştirici tarafından bir kez üretilmiş olanı gönderecektir.
+  - Dynamic: Sunucuya her istek geldiğinde sunucunun gerçekten yeni HTML ürettiği dinamik görüntülemeye sahibiz. Yani temelde her kullanıcı için yeni sayfalar oluşturacaktır.Bu da altta kalan veriler sık sık değiştiğinde harikadır.
 
 - SSR da veriyi alma ve html sayfasını işleme server da başlar.
 - En büyük içerik boyaması genellikle csr den çok daha önce gerçekleşir. Bu da ssr ın, kullanıcıların tüm içeriğin görünmesini beklemek istemediği içerik ağırlıklı sitelerde bu kadar yararlı olmasının bir başka nedenidir.
@@ -44,17 +42,17 @@
   - Yalnızca tarayıcı API'lerini kullanma
   - Side effectleri yanlış kullanmak
 
-## Next.js key ingredients:
+## NEXT.JS KEY INGREDIENTS
 
-1-Server Side Rendering (Dynamıc and Statıc): Her route için seçebileceğimiz hem dinamik hem de statik oluşturmayı destekler.
-2- File Based Routing Conventions: Routelar klasörlerdir.
-Ayrıca sayfalar, layout, hatalar, yükleme ekranları vb. için özel dosya kuralları vardır.
-3- Data Fetching And Mutation On The Server: Verileri doğrudan sunucu bileşenlerine getirme server actions
-4- Optimizasyon tekniği sunuyor: SEO, route ön yüklemesi, görüntü ve yazı tipi (font) optimizasyonu gibi hem buyuk perormans kazanımları hem de arama motoru optimizasyonunu iyilestiren araçlardır.
+- Server Side Rendering (Dynamıc and Statıc): Her route için seçebileceğimiz hem dinamik hem de statik oluşturmayı destekler.
+- File Based Routing Conventions: Routelar klasörlerdir.
+  Ayrıca sayfalar, layout, hatalar, yükleme ekranları vb. için özel dosya kuralları vardır.
+- Data Fetching And Mutation On The Server: Verileri doğrudan sunucu bileşenlerine getirme server actions
+- Optimizasyon tekniği sunuyor: SEO, route ön yüklemesi, görüntü ve yazı tipi (font) optimizasyonu gibi hem buyuk perormans kazanımları hem de arama motoru optimizasyonunu iyilestiren araçlardır.
 
 Next.js de "App" ve "Pages" adında 2 tür router vardır (Next.js yazmanın 2 yolu):
 
-## Modern Next.js :"APP" Router ->
+## MODERN NEXT.JS :"APP" ROUTER
 
 - Next.js 13.4 2023 te tanıtıldı.
 - Yeni projeler için önerilir.(recommended version)
@@ -66,7 +64,7 @@ Next.js de "App" ve "Pages" adında 2 tür router vardır (Next.js yazmanın 2 y
 - Önbelleğe alma (caching) çok agresif ve kafa karıştırıcı
 - Öğrenme süreci zorlu
 
-## Legacy Next.js: "PAGES" Router ->
+## LEGACY NEXT.JS: "PAGES" ROUTER
 
 - V1 den bu yana ilk Next.js 2016 da tanıtıldı
 - Hala destekleniyor ve gelecekte güncellenecek
@@ -74,7 +72,7 @@ Next.js de "App" ve "Pages" adında 2 tür router vardır (Next.js yazmanın 2 y
 - Düzenler(LAYOUT) gibi basit şeylerin uygulanması kafa karıştırıcıdır
 - getStaticProps ve getServerSideProps gibi özel apilerla veri getirilir
 
-## -- Neden Server Components ?
+## -- NEDEN SERVER COMPONENTS ?
 
 İstemci-sunucu şelalesi (Request waterfall): Bir sayfadakı birden fazla bileşenin farklı verileri birbiri ardına getirmesi gerektiğinde ortaya cıkan bır sorundur.
 Server side: Component yok, kolay ve hızlı veri getirme, veri kaynağına yakın, js taşımaya gerek duymuyor
@@ -87,7 +85,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 - App klasöründe loading.js adında oluşturulan modül, veri yakalaması yapılan her sayfada çalışır ve ekranda loader gösterir. Next Js kullanılırken browserda js devre dışı bırakılırsa loading.js çalışmaz. Eğer js olmadan projenin çalışmasını istiyorsak loadıng js kullanamayız.
 
-### Server ve Client component örnekleri nasıl ve nerede oluşturulur?
+### SERVER ve CLİENT COMPONENT örnekleri nasıl ve nerede oluşturulur?
 
 - Örneğin RSC mimarisini kullanan bir uygulamamız var. SC ve CC örneklerini içeren bir component ağacına sahibiz.
   React bunun gibi bir ağaçla karşılaştığında gerçekleşecek ilk şey tüm sunucu bileşenlerinin tabii ki sunucuda render edilmesidir.Bildiğimiz üzere bir bileşeni renderlamak basitçe bir React öğesi ile sonuçlanır.
@@ -116,7 +114,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - SSR sadece ilk render için geçerlidir.
 - !!! Hem client hem de server componentler server da ilk SSR işleminde çalışır. Ancak bundan sonra, uygulama tarayıcıda etkileşimli olduğundan sunucu bileşenleri yalnızca gerçek web tarayıcısında çalışır.
 
-## Next.js PROJESİ OLUŞTURURKEN ADIMLAR:
+## NEXT.JS PROJESİ OLUŞTURURKEN ADIMLAR:
 
 - npx create-next-app@latest projectName
 - App router'da oluşturduğumuz her bir klasör ismi bir pathname olarak kullanılır ve her klasör içerisinde o pathname ile eşleşen bir page.js modülü oluşturmalıyız.
@@ -134,9 +132,9 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - React router daki gibi Next.js de programmatic navigation için bazı react hookları sağlıyor. Ancak bunlar bu sayfa bileşenlerinde çalışmayacaktır. Çünkü bunlar server(sunucu) componentleridir ve react hookları burada çalışmaz.
 - Next.js'te sayfa başlığını belirlemek için metadata kullanılırken, favicon dosyası icon adıyla belirtilir.
 - Resimler her zaman sayfa boyutuna katkıda bulunan en büyük faktörlerdir. Dolayısıyla yükleme hızlarına etkisi olur. Buna dayanarak Next.Js in sağladığı
-  - 1-Bilgisayarda bulunan herhangi bir resim için: `<Image src... height="60" width="60" ` ile resimleri optimize edebiliriz.
+  - Bilgisayarda bulunan herhangi bir resim için: `<Image src... height="60" width="60" ` ile resimleri optimize edebiliriz.
     - Modern formatlarda doğru boyutlandırılmış görüntüleri sadece gerekli olduğunda otomatik olarak sunacaktır.
     - Tam yükseklik ve genişliği belirtmeye zorladığı için düzen kaymalarını önler.
     - Görüntüleri görüntü alanına gerçekten girdiklerinde otomatik olarak lazy olarak yükler.
-  - 2- Duyarlı görüntüiçin: Resmi import ederek de optimize edebiliriz. `<Image src={logo} quality={100} height="60" width="60" `
+  - Duyarlı görüntüiçin: Resmi import ederek de optimize edebiliriz. `<Image src={logo} quality={100} height="60" width="60" `
     - Bu formatta yükseklik ve genişliği belirtmek zorunda değiliz.
