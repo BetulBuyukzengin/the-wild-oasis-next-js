@@ -134,9 +134,9 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - React router daki gibi Next.js de programmatic navigation için bazı react hookları sağlıyor. Ancak bunlar bu sayfa bileşenlerinde çalışmayacaktır. Çünkü bunlar server(sunucu) componentleridir ve react hookları burada çalışmaz.
 - Next.js'te sayfa başlığını belirlemek için metadata kullanılırken, favicon dosyası icon adıyla belirtilir.
 - Resimler her zaman sayfa boyutuna katkıda bulunan en büyük faktörlerdir. Dolayısıyla yükleme hızlarına etkisi olur. Buna dayanarak Next.Js in sağladığı
-  - 1- `<Image src... height="60" width="60" ` ile resimleri optimize edebiliriz.
+  - 1-Bilgisayarda bulunan herhangi bir resim için: `<Image src... height="60" width="60" ` ile resimleri optimize edebiliriz.
     - Modern formatlarda doğru boyutlandırılmış görüntüleri sadece gerekli olduğunda otomatik olarak sunacaktır.
     - Tam yükseklik ve genişliği belirtmeye zorladığı için düzen kaymalarını önler.
-    - Görüntüleri görüntü alanına gerçekten girdiklerinde otomatik olarak tembel yükler.
-  - 2- Resmi import ederek de kullanabiliriz. `<Image src={logo} quality={100} height="60" width="60" `
+    - Görüntüleri görüntü alanına gerçekten girdiklerinde otomatik olarak lazy olarak yükler.
+  - 2- Duyarlı görüntüiçin: Resmi import ederek de optimize edebiliriz. `<Image src={logo} quality={100} height="60" width="60" `
     - Bu formatta yükseklik ve genişliği belirtmek zorunda değiliz.
