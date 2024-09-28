@@ -74,18 +74,6 @@ Next.js de "App" ve "Pages" adında 2 tür router vardır (Next.js yazmanın 2 y
 - Düzenler(LAYOUT) gibi basit şeylerin uygulanması kafa karıştırıcıdır
 - getStaticProps ve getServerSideProps gibi özel apilerla veri getirilir
 
-Next.js PROJESI OLUŞTURURKEN ADIMLAR:
-npx create-next-app@latest projectName projede 14.suurum kullandım.
-
-- App router'da oluşturduğumuz her bir klasör ismi bir pathname olarak kullanılır ve her klasör içerisinde o pathname ile eşleşen bir page.js modülü oluşturmalıyız.
-- Oluşturduğumuz bir klasör'ün pathname olarak algılanmasından kaçınmak için
-  \_components şeklinde bir tanımlama yapabiliriz. Böylece components adında bir path oluşturulmaz.
-- Yönlendirme için `<Link href="/cabins">cabin</Link>`şeklinde kullanılır.
-- Link performans optimizasyonu sağlar. Belirli bir sayfada bağlantılı olan tüm routeları önceden getirecektir .
-- Her sayfa ayrı ayrı yığın olarak indirilir. Tarayıcıda ziyaret ettiğimiz her sayfa aslında doğrudan tarayıcıda da ön belleğe alınacaktır. Bu yüzden geçici olarak orada saklanacaktır.
-
-- React router daki gibi Next.js de programmatic navigation için bazı react hookları sağlıyor. Ancak bunlar bu sayfa bileşenlerinde çalışmayacaktır. Çünkü bunlar server(sunucu) componentleridir ve react hookları burada çalışmaz.
-
 ## -- Neden Server Components ?
 
 İstemci-sunucu şelalesi (Request waterfall): Bir sayfadakı birden fazla bileşenin farklı verileri birbiri ardına getirmesi gerektiğinde ortaya cıkan bır sorundur.
@@ -125,5 +113,30 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 - RSC ve SSR farklı teknolojilerdir. RSC, SSR ın yerini almak değil onu tamamlamaktır. Genellikle birlikte çalışırlar bunu sağlayan da NEXT.JS dir.
   -SSR tüm componentleri alıyor, html olarak işliyor ve ardından tarayıcıya gönderiyor. Aradaki fark hem client hemde server componentlerin next web sunucusunda işleniyor olması.
-  SSR sadece ilk render için geçerlidir.
+- SSR sadece ilk render için geçerlidir.
 - !!! Hem client hem de server componentler server da ilk SSR işleminde çalışır. Ancak bundan sonra, uygulama tarayıcıda etkileşimli olduğundan sunucu bileşenleri yalnızca gerçek web tarayıcısında çalışır.
+
+## Next.js PROJESİ OLUŞTURURKEN ADIMLAR:
+
+- npx create-next-app@latest projectName
+- App router'da oluşturduğumuz her bir klasör ismi bir pathname olarak kullanılır ve her klasör içerisinde o pathname ile eşleşen bir page.js modülü oluşturmalıyız.
+- Oluşturduğumuz bir klasörün pathname olarak algılanmasından kaçınmak için `_components` şeklinde bir tanımlama yapabiliriz. Böylece components adında bir path oluşturulmaz.
+- Yönlendirme `<Link href="/cabins">cabin</Link>`şeklinde kullanılır.
+- \_lib: Database ile ilgili işlemleri içinde barındırır.
+- \_styles: Stilleri içinde barındır.
+- not-foud.js: Url de karşılığı olmayan sayfa için gösterilecek şey.
+- Next js fontlar için çok sağlam performans optimizasyonu ve gizlilik sağlar. Google fontlarını otomatik olarak self-host yapmamıza izin verir.
+- Next.Js de componentler default olarak server componenttir.
+- Server componenti "use client" ile client componente dönüştürebiliriz.
+- Client componentin child componentleri server component olamaz ama server componentlerin child componentleri client component olabilir.
+- Link performans optimizasyonu sağlar. Belirli bir sayfada bağlantılı olan tüm route ları önceden getirecektir.
+- Her sayfa ayrı ayrı yığın olarak indirilir. Tarayıcıda ziyaret ettiğimiz her sayfa aslında doğrudan tarayıcıda da ön belleğe alınacaktır. Bu yüzden geçici olarak orada saklanacaktır.
+- React router daki gibi Next.js de programmatic navigation için bazı react hookları sağlıyor. Ancak bunlar bu sayfa bileşenlerinde çalışmayacaktır. Çünkü bunlar server(sunucu) componentleridir ve react hookları burada çalışmaz.
+- Next.js'te sayfa başlığını belirlemek için metadata kullanılırken, favicon dosyası icon adıyla belirtilir.
+- Resimler her zaman sayfa boyutuna katkıda bulunan en büyük faktörlerdir. Dolayısıyla yükleme hızlarına etkisi olur. Buna dayanarak Next.Js in sağladığı
+  - 1- `<Image src... height="60" width="60" ` ile resimleri optimize edebiliriz.
+    - Modern formatlarda doğru boyutlandırılmış görüntüleri sadece gerekli olduğunda otomatik olarak sunacaktır.
+    - Tam yükseklik ve genişliği belirtmeye zorladığı için düzen kaymalarını önler.
+    - Görüntüleri görüntü alanına gerçekten girdiklerinde otomatik olarak tembel yükler.
+  - 2- Resmi import ederek de kullanabiliriz. `<Image src={logo} quality={100} height="60" width="60" `
+    - Bu formatta yükseklik ve genişliği belirtmek zorunda değiliz.
