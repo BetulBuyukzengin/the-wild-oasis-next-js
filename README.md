@@ -123,6 +123,8 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - \_lib: Database ile ilgili işlemleri içinde barındırır.
 - \_styles: Stilleri içinde barındır.
 - not-foud.js: Url de karşılığı olmayan sayfa için gösterilecek şey.
+- layout: Tüm sayfalar için erişilebilir olması ve içerik bileşenini (children) her sayfada göstermek için app klasöründe global bir layout oluşturabiliriz.
+- Bazı sayfalar için özel layoutlar kullanmak isterseniz, bu sayfaların kendi layout dosyalarını oluşturabilirsiniz. Bu layout sadece o klasöre ait sayfalar için geçerli olur.
 - Next js fontlar için çok sağlam performans optimizasyonu ve gizlilik sağlar. Google fontlarını otomatik olarak self-host yapmamıza izin verir.
 - Next.Js de componentler default olarak server componenttir.
 - Server componenti "use client" ile client componente dönüştürebiliriz.
@@ -138,3 +140,9 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
     - Görüntüleri görüntü alanına gerçekten girdiklerinde otomatik olarak lazy olarak yükler.
   - Duyarlı görüntüiçin: Resmi import ederek de optimize edebiliriz. `<Image src={logo} quality={100} height="60" width="60" `
     - Bu formatta yükseklik ve genişliği belirtmek zorunda değiliz.
+
+## Data fetching, catching, rendering
+
+- .env.local: Geliştirme sırasında, yerel ortamda kullanılan çevresel değişkenleri tanımlamak için kullanılır. Bu dosya genellikle versiyon kontrolüne dahil edilmez ve sadece geliştirme sırasında kullanılır.
+- env: Hem geliştirme hem de diğer aşamalarda kullanılabilecek genel çevresel değişkenleri tanımlamak için kullanılır. Bu dosya, tüm ortamlarda geçerli olan değerleri içerir.
+- .env.production: Uygulamanız canlıya alındıktan sonra kullanılan çevresel değişkenleri tanımlar. Bu değişkenler, production ortamında çalışırken geçerli olacaktır.
