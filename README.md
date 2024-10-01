@@ -125,6 +125,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - not-foud.js: Url de karşılığı olmayan sayfa için gösterilecek şey.
 - layout: Tüm sayfalar için erişilebilir olması ve içerik bileşenini (children) her sayfada göstermek için app klasöründe global bir layout oluşturabiliriz.
 - Bazı sayfalar için özel layoutlar kullanmak isterseniz, bu sayfaların kendi layout dosyalarını oluşturabilirsiniz. Bu layout sadece o klasöre ait sayfalar için geçerli olur.
+- Tıpkı layoutlar gibi loader lar da sayfalar için özelleştirilebilir.
 - Next js fontlar için çok sağlam performans optimizasyonu ve gizlilik sağlar. Google fontlarını otomatik olarak self-host yapmamıza izin verir.
 - Next.Js de componentler default olarak server componenttir.
 - Server componenti "use client" ile client componente dönüştürebiliriz.
@@ -146,3 +147,12 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - .env.local: Geliştirme sırasında, yerel ortamda kullanılan çevresel değişkenleri tanımlamak için kullanılır. Bu dosya genellikle versiyon kontrolüne dahil edilmez ve sadece geliştirme sırasında kullanılır.
 - env: Hem geliştirme hem de diğer aşamalarda kullanılabilecek genel çevresel değişkenleri tanımlamak için kullanılır. Bu dosya, tüm ortamlarda geçerli olan değerleri içerir.
 - .env.production: Uygulamanız canlıya alındıktan sonra kullanılan çevresel değişkenleri tanımlar. Bu değişkenler, production ortamında çalışırken geçerli olacaktır.
+
+## SUSPENSE NEDİR?
+
+- Bazı asenkron işlemler yaptıkları için henüz render edilmeye hazır olmayan bileşenleri yakalamak veya izole etmek için kullanabileceğimiz yerleşik bir react componentidir. Yani bu componentlerin hatta tüm alt ağaçların askıya alınmasıdır. Çünkü react tarafından renderlanmaya hazır değiller. Örneğin try-catch kavramı olarak düşündüğümüzde catch in hataları yakalaması gibi suspense de askıya alınan componentleri yakalar.
+
+### Bir componentin askıya alınmasına ne neden olur?
+
+- Suspense'i destekleyen bir kütüphane kullanarak veri getirmek
+- React'ın lazy loading özelliğini kullanarak loading additional code yüklemek
