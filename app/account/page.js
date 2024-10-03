@@ -1,3 +1,5 @@
+//! Metadata
+
 export const metadata = {
   title: "Guest area",
 };
