@@ -150,9 +150,15 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 ## SUSPENSE NEDİR?
 
-- Bazı asenkron işlemler yaptıkları için henüz render edilmeye hazır olmayan bileşenleri yakalamak veya izole etmek için kullanabileceğimiz yerleşik bir react componentidir. Yani bu componentlerin hatta tüm alt ağaçların askıya alınmasıdır. Çünkü react tarafından renderlanmaya hazır değiller. Örneğin try-catch kavramı olarak düşündüğümüzde catch in hataları yakalaması gibi suspense de askıya alınan componentleri yakalar.
+- Bazı asenkron işlemlerde henüz render edilmeye hazır olmayan bileşenleri yakalamak veya izole etmek için kullanabileceğimiz yerleşik bir react componentidir. Yani bu componentlerin hatta tüm alt ağaçların askıya alınmasıdır. Çünkü react tarafından renderlanmaya hazır değillerdir. Örneğin try-catch kavramı olarak düşündüğümüzde catch in hataları yakalaması gibi suspense de askıya alınan componentleri yakalar.
+- Bu bileşenleri suspense e sarmalıyız ve bu içerik yerine loader gösterebiliriz.
+- Asenkron olan bu componenti asenkron olmayan componentte çağırıp şu şekilde sarmalıyız:</br>
+  `<Suspense fallback={<Spinner />}><ExampleComponent /></Suspense>`
 
 ### Bir componentin askıya alınmasına ne neden olur?
 
 - Suspense'i destekleyen bir kütüphane kullanarak veri getirmek
-- React'ın lazy loading özelliğini kullanarak loading additional code yüklemek
+- React'ın lazy loading özelliğini kullanmak
+
+-Fiber ağacı temel olarak uygulamamızın her bir bileşen örneğinin ve DOM ögesinin dahili temsilidir.
+Sanal Dom arasındaki fark fiber ağacının asla yok edilmeyen değiştirilebilir bir veri yapısı olmasıdır. Bu da onu state i, hook u depolamak için mükemmel bir yer haline getirir.
