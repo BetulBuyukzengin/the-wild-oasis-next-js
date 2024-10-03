@@ -168,3 +168,4 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 - Yeni bir klasör oluşturup adını [rootName] şeklinde vermeliyiz. İçerisine yine page.js adında dosya oluşturmalıyız.
 - Burada url den veri almak istersek componentten `params` adlı propu almalıyız.
+- **Generate metadata**: Her sayfa için dinamik olarak meta veriler (başlık, açıklama, Open Graph etiketleri) oluşturmak için kullanılan bir fonksiyondur.
