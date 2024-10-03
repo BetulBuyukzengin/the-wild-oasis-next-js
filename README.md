@@ -160,5 +160,11 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - Suspense'i destekleyen bir kütüphane kullanarak veri getirmek
 - React'ın lazy loading özelliğini kullanmak
 
--Fiber ağacı temel olarak uygulamamızın her bir bileşen örneğinin ve DOM ögesinin dahili temsilidir.
-Sanal Dom arasındaki fark fiber ağacının asla yok edilmeyen değiştirilebilir bir veri yapısı olmasıdır. Bu da onu state i, hook u depolamak için mükemmel bir yer haline getirir.
+### Fiber ağacı:
+
+- Temel olarak uygulamamızın her bir bileşen örneğinin ve DOM ögesinin dahili temsilidir.Sanal Dom arasındaki farkı ise, fiber ağacının asla yok edilmeyen değiştirilebilir bir veri yapısı olmasıdır. Bu da onu state i, hook u depolamak için mükemmel bir yer haline getirir.
+
+## Dynamic Route
+
+- Yeni bir klasör oluşturup adını [rootName] şeklinde vermeliyiz. İçerisine yine page.js adında dosya oluşturmalıyız.
+- Burada url den veri almak istersek componentten `params` adlı propu almalıyız.
