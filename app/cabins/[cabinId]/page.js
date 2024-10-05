@@ -8,7 +8,7 @@ export async function generateMetadata({ params }) {
   return { title: `Cabin ${name}` };
 }
 
-//! Dynamic rendering i statict yapma:
+//! Dynamic rendering i static yapma:
 export async function generateStaticParams() {
   const cabins = await getCabins();
   const ids = cabins.map((cabins) => ({ cabinId: String(cabin.id) }));
