@@ -169,3 +169,91 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - Yeni bir klasör oluşturup adını [rootName] şeklinde vermeliyiz. İçerisine yine page.js adında dosya oluşturmalıyız.
 - Burada url den veri almak istersek componentten `params` adlı propu almalıyız.
 - **Generate metadata**: Her sayfa için dinamik olarak meta veriler (başlık, açıklama, Open Graph etiketleri) oluşturmak için kullanılan bir fonksiyondur.
+
+## Error Page
+
+- Oluşturulan dosya adı error.js adında ve bu component client bir component olmalıdır.
+- İç içe geçmiş error boundry oluşturabiliriz yani her sayfanın kendine ait error sayfası olabilir.
+- Uygulamanın herhangi bir yerinde meydana gelen tüm hatalar ve istisnalar için çalışır ancak yalnızca renderlanma sırasında çalışır. Dolayısıyla call back fonksiyonlarında meydana gelecek herhangi bir hata aslında bir react error boundry tarafından yakalanmayacaktır. Dolayısıyla burada sadace renderlama hataları yakalanacaktır. Ayrıca root layout ta meydana gelen hataları yakalamaz. Bunun için **global error** adında bir dosya oluşturmalıyız
+
+## Not-found
+
+- not found dosyası ile url de bulunmayan sayfalar için otomatik olarak devreye girer ve özelleştirilmiş bir hata sayfası gösterebiliriz.(404 not found).
+- Her sayfa için özelleştirilmiş not found sayfası oluşturabiliriz.
+
+## SSR ın 2 tipi vardır:
+
+### 1- Static Rendering:
+
+- HTML build yapıldığında ya da periyodik olarak arkaplanda yeniden veri yakalanmasıyla (ISR: Incremental Static Rendering) oluşturulur.
+- Veri sıklıkla değişmediğinde ve kişiselleştirilmediğinde kullanışlıdır.
+- Default olarak her zaman Next.JS static renderlama yapar.
+- Daha hızlıdır.
+- Proje vercel ile deploy edildiğinde her static sayfa otomatik olarak cdn de host edilir.
+- Eğer bir uygulamanın tüm route ları static ise tüm uygulama static bir site gibi çıkarılabilir (SSG:Static Site Generation).
+
+### 2- Dynamic Rendering
+
+- Server a her yeni istek ulaştığında HTML oluşturulur.
+- Veriler sürekli değişiyor ve kullanıcıya göre kişiselleştiriliyorsa dynamic rendering mantıklıdır.
+- Route un renderlanması talebe bağlıdır (search params).
+- Next.JS default olarak static renderlama yapsada bazı koşullarda renderlama otomatik olarak dynamic e döner.
+- Proje vercel ile deploy edildiğinde her dynamic route otomatik olarak sunucusuz (serverless) bir fonksiyon olur.
+- `Not: Next.Js için aşağıdakiler önemlidir çünkü build zamanında bu değerlerin herhangi birini bilmenin bir yolu yoktur.`
+
+  - Genellikle geliştiriciler bir route un static ya da dynamic olmasını direkt olarak seçmezler. Next.JS otomatik olarak aşağıdaki senaryolarda dinamik renderlamaya geçer.
+  - Eğer ki dynamic bir route ise (paramsı kullanan bir sayfa)
+  - Herhangi bir route içinde (page.js) searchParams'ın kullanımı.
+  - Route'ın herhangi bir server componentinde headers() veya cookies()'in kullanılması
+  - Route'ın herhangi bir server componentinde Cache'e alınmamış bir veri isteği yapılması
+
+- `Aynı zamanda bir route un dinamik olarak renderlanması için Next.JS i aşağıdaki yöntemlerle zorlayabiriz.`
+  - export const dynamic="force-dynamic"; // page.js den
+  - export const revalidate=0; // page.js den
+  - {cache:'no-store'} // Route un server componentlerinden herhangi birinde fetch isteğinde
+  - noStore() // Route un server componentlerinden herhangi birinde
+
+### CDN (Content Delivery Network) :
+
+- Web sitelerin sabit içeriğini (HTML,CSS,JS,resimler) kullanıcıya olabildiğince yakından sunan ve dünyanın etrafında konumlanmış bir sunucular ağıdır.
+
+### Serverless Computing (Sunucusuz bilgi işlem):
+
+- Sunucusuz işlem modeli ile uygulama kodlarını (genellikle backend kodu) sunucuyu kendimiz düzenlemeden çalıştırırız. Bunun yerine bir sunucu dağıtıcısında sadece fonksiyonlar çalıştırırız (serverless functions). Sunucu sadece sunucusuz fonksiyon çalışırken aktiftir. (Node.js uygulamalarındaki gibi sunucu sürekli açık değildir.). Bütün dynamic route lar bu şekilde çalışır.
+
+### The "edge" (uç):
+
+- Kullanıcıya mümkün olduğunca yakın.
+- CDN bir "edge" ağın parçasıdır ancak aynı zamanda serverless "edge" computing de vardır. Bu, merkezi bir sunucuda gerçekleşmeyen serverless edge computing dir ancak kullanıcıya mümkün olduğu kadar yakın, dünya çapında dağıtılan bir ağda (bir CDN gibi ancak kod çalıştırmak için).
+- Vercel'de deploy edildiğinde edge de çalışacak belirli rotaları seçebiliriz.
+
+### Incremental Static Regeneration (ISR-Artımlı Statik Yenileme):
+
+- Geliştiricilerin, web sitesi zaten oluşturulup dağıtıldıktan sonra bile arka planda statik bir sayfanın içeriğini güncellemesine olanak tanıyan bir Next.js özelliğidir. Bu, belirli bir aralıktan sonra bir bileşenin veya tüm route un verilerinin yeniden getirilmesiyle gerçekleşir.
+
+### Dynamic rendering i static yapma:
+
+- Async olan ve exportlanan bir generateStaticParams() fonksiyonu ile yapabiliriz. (cabinId page)
+- generateStaticParams ile tamamen static e çevirdiğimiz projemizi SSG (Static Site Generation) olarak oluşturmak için next.config içerisinde `output:"export"` olarak belirtmeliyiz. Eğer herhangi bir dynamic route varsa `output:"export"` u kapatmalıyız aksi halde hata verecektir.
+
+## Partial Pre-Rendering:
+
+- Çoğu sayfanın %100 static ya da %100 dynamic olması gerekmediğinden bu yöntem bulunmuştur.(Hem static hem dynamic). Örneğin diğer tüm sayfaların static renderlandığı bir durumda sadece header'da login olan kullanıcının ismininin yazması tüm projeyi dynamic olarak çalıştırır. Bunun yerine sadece kullanıcı adının bulunduğu kısmı dynamic, diğer tüm projeyi static olarak renderlamak projemize büyük bir performans kazancı sağlar. (Static renderlama CDN'ler ile çalıştığı için). Şuan NextJS'de bu özellik bulunmuyor. Fakat gelecekte bir Next versiyonunda bunu kullanmak için yapılması gerekecek şeyler şunlardır:
+  - Öncelikle next.config dosyasından PPR (Partial Pre-Rendering) açılmalıdır.
+  - Dynamic parçalar (components) Suspense ile sarılmalıdır. Böylece tüm route yerine hangi parçanın dynamic olması gerektiği belirtilecektir.
+  - Bu dynamic parçalar yüklenirken gösterilecek static bir fallback bırakmamız gerekecektir.
+
+## Next.JS verileri nasıl cache e (ön bellek) alır?
+
+### Caching:
+
+-👍 Getirilen veya hesaplanan verilerin gelecekte erişilebilmesi için geçici bir konumda saklanması. Böylece her ihtiyaç duyulduğunda verileri yeniden getirmek ya da hesaplamak zorunda kalmayız.
+-👎 Next.JS te alınabilecek her şey cache e alınır.
+
+-👉 Next.JS, cache revalidation (yeniden doğrulama) için API' ler sağlar (Verileri önbellekten kaldırmak ve yeni verilerle güncellemek (yeniden getirilen veya yeniden hesaplanan))
+
+-👍 Next.js uygulamalarını daha performanslı hale getirir ve maliyetlerden tasarruf sağlar (computing ve data access)
+-👎 Cache e alma varsayılan olarak her zaman açıktır. Bazı durumlarda beklenmedik davranışlar sergiler. Bazı cache ler kapatılamaz .
+-👎 Çok kafa karıştırıcıdır: Birçok farklı Next.js API'si cache e almayı etkiler ve kontrol eder.
+
+#### Caching Mekanizmaları
