@@ -249,11 +249,27 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 -👍 Getirilen veya hesaplanan verilerin gelecekte erişilebilmesi için geçici bir konumda saklanması. Böylece her ihtiyaç duyulduğunda verileri yeniden getirmek ya da hesaplamak zorunda kalmayız.
 -👎 Next.JS te alınabilecek her şey cache e alınır.
-
 -👉 Next.JS, cache revalidation (yeniden doğrulama) için API' ler sağlar (Verileri önbellekten kaldırmak ve yeni verilerle güncellemek (yeniden getirilen veya yeniden hesaplanan))
-
 -👍 Next.js uygulamalarını daha performanslı hale getirir ve maliyetlerden tasarruf sağlar (computing ve data access)
--👎 Cache e alma varsayılan olarak her zaman açıktır. Bazı durumlarda beklenmedik davranışlar sergiler. Bazı cache ler kapatılamaz .
+-👎 Cache e alma varsayılan olarak her zaman açıktır. Bazı durumlarda beklenmedik davranışlar sergiler. Bazı cache ler kapatılamaz.
 -👎 Çok kafa karıştırıcıdır: Birçok farklı Next.js API'si cache e almayı etkiler ve kontrol eder.
 
-#### Caching Mekanizmaları
+#### Caching Mekanizmaları:
+
+427 yi tablo şeklinde ekle...
+
+- `Request Memoization`:
+  - Server da olur.
+  - Get isteklerine benzer veri fetchlemede aynı url ve options a sahip ise cache e aldığını kullanır.
+- `Data Cache`:Server
+- `Full Route Cache`:Server
+- `Router Cache`:Client
+
+## Caching Mekanizmaları
+
+| Özellikler     | Request Memoization | Data Cache       | Full Route Cache | Router Cache  |
+| -------------- | ------------------- | ---------------- | ---------------- | ------------- |
+| Nerede         | ------------------- | ---------------- | ---------------- | ------------- |
+| Hangi Data     | ------------------- | ---------------- | ---------------- | ------------- |
+| Süre           | ------------------- | ---------------- | ---------------- | ------------- |
+| Olanak veririr | ------------------- | ---------------- | ---------------- | ------------- |
