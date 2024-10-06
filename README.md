@@ -267,9 +267,9 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 ## Caching Mekanizmaları
 
-| Özellikler     | Request Memoization | Data Cache       | Full Route Cache | Router Cache  |
-| -------------- | ------------------- | ---------------- | ---------------- | ------------- |
-| Nerede         | ------------------- | ---------------- | ---------------- | ------------- |
-| Hangi Data     | ------------------- | ---------------- | ---------------- | ------------- |
-| Süre           | ------------------- | ---------------- | ---------------- | ------------- |
-| Olanak veririr | ------------------- | ---------------- | ---------------- | ------------- |
+| Özellikler     | Request Memoization                                                                                | Data Cache       | Full Route Cache | Router Cache  |
+| -------------- | -------------------------------------------------------------------------------------------------- | ---------------- | ---------------- | ------------- |
+| Nerede         | Server                                                                                             | Server           | Server           | Client        |
+| Hangi Data     | Get isteklerine benzer veri fetchlemede aynı url ve options a sahip ise cache e aldığını kullanır. | ---------------- | ---------------- | ------------- |
+| Süre           | -------------------                                                                                | ---------------- | ---------------- | ------------- |
+| Olanak veririr | -------------------                                                                                | ---------------- | ---------------- | ------------- |
