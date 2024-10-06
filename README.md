@@ -256,20 +256,36 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 #### Caching Mekanizmaları:
 
-427 yi tablo şeklinde ekle...
-
 - `Request Memoization`:
-  - Server da olur.
+
   - Get isteklerine benzer veri fetchlemede aynı url ve options a sahip ise cache e aldığını kullanır.
-- `Data Cache`:Server
-- `Full Route Cache`:Server
-- `Router Cache`:Client
+  - Cache olarak server'ı kullanır.
+  - Birden fazla yerde yapılan aynı istek tekrar tekrar API isteği oluşturmaz, tek bir istekte alınan veriler tüm isteklerde kullanılır. Fakat bu durum sadece fetch() fonksiyonu ile çalışır ve istekler birebir aynı olmalıdır.
+  - Yeniden doğrulama yapma mümkün değildir.
+  - Vazgeçmek için ise AbortController kullanılabilir.
 
-## Caching Mekanizmaları
+- `Data Cache`:
+  - Cache olarak server'ı kullanır.
+  - Veri olarak bir route'da yakalanan verileri veya te bir fetch isteğini cache'e alır.
+  - Yakalanan veriler sonsuza kadar cache'de kalır. (Revalidate yapmak istesek bile)
+  - Özellikle static sayfalar için kullanılır. Milyon tane kullanıcıya aynı verileri göstermek için mükemmeldir.
+  - Açık ara geliştiriciler için düşünülmesi en önemli cache diyebiliriz.
+  - Yeniden doğrulama için kullanabileceğimiz birden fazla yöntem vardır.
+  - Time-based (otomatik) sayfadaki tüm veri için [ export const revalidate = time page.js'de ]
+  - Time-based(otomatik) tek bir veri isteği için [ fetch(... , { next: { revalidate: time }}) ]
+  - İsteğe bağlı olarak (manuel) revalidatePath veya revalidateTag
+  - Tüm sayfada Vazgeçmek/iptal etmek için ise export const revalidate = 0 page.js'de veya export const dynamic = "force-dynamic" yine page.js'de kullanabiliriz.
+  - Tek bir istek için Vazgeçmek/iptal etmek için fetch(... , { cache: 'no-store'}) veya Tek bir server komponent için noStore() fonksiyonu kullanılabilir.
+- `Full Route Cache`:
 
-| Özellikler     | Request Memoization                                                                                | Data Cache       | Full Route Cache | Router Cache  |
-| -------------- | -------------------------------------------------------------------------------------------------- | ---------------- | ---------------- | ------------- |
-| Nerede         | Server                                                                                             | Server           | Server           | Client        |
-| Hangi Data     | Get isteklerine benzer veri fetchlemede aynı url ve options a sahip ise cache e aldığını kullanır. | ---------------- | ---------------- | ------------- |
-| Süre           | -------------------                                                                                | ---------------- | ---------------- | ------------- |
-| Olanak veririr | -------------------                                                                                | ---------------- | ---------------- | ------------- |
+  - Cache olarak server'ı kullanır.
+  - Tüm static sayfaları ( HTML ve RSC Payload ) cache'e alır.
+  - Data Cache yeniden doğrulanana veya proje yeniden deploy edilene kadar temizlenmez.
+
+- `Router Cache`:
+  - Cache olarak Client'ı kullanır.
+  - Önceden yakalanmış ve anlık olarak kullanıcının uygulamada gezindiği sayfaları cache'e alır. [ Static & Dynamic ]
+  - Yakalanan veriler sayfa dynamic ise 30 saniye, sayfa static ise 5 dakika cache'de tutulur. Yani sayfayı komple kapatıp açtığımızda dahi outdated veri görebiliriz. NextJS ile ilgili en büyük problemlerden birisi de budur.
+  - Yeniden doğrulama için revalidatePath veya revalidateTag (Server Action'da)
+  - router.refresh, cookies.set veya cookies.delete'de yine Server Action'da revalidate için kullanılabilir.
+  - Vazgeçmek veya iptal etmek için herhangi bir yöntem yoktur.
