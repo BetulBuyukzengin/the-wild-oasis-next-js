@@ -29,7 +29,7 @@
 - İçerik odaklı web siteler veya uygulamalar için kullanılmalıdır. Örneğin e-ticaret platformları, bloglar, haberler, satış siteleri vs.
 - 2 tip SSR vardır:
 
-  - Static: HTML derleme zamanında oluşturulur (built yaptığımızda). Yani geliştirici projeyi geliştirmeyi bitirdiğinde siteyi statik html, css, js dosyalarına aktarır ve bunlar daha sonra bir web sunucusuna dağıtılabilir. Ancak bu web sunucusu işaretlemeyi her zaman yeniden oluşturmayacaktır. Başlangıçta geliştirici tarafından bir kez üretilmiş olanı gönderecektir.
+  - Static: HTML derleme zamanında oluşturulur (built yaptığımızda). Yani geliştirici projeyi geliştirmeyi bitirdiğinde siteyi static html, css, js dosyalarına aktarır ve bunlar daha sonra bir web sunucusuna dağıtılabilir. Ancak bu web sunucusu işaretlemeyi her zaman yeniden oluşturmayacaktır. Başlangıçta geliştirici tarafından bir kez üretilmiş olanı gönderecektir.
   - Dynamic: Sunucuya her istek geldiğinde sunucunun gerçekten yeni HTML ürettiği dinamik görüntülemeye sahibiz. Yani temelde her kullanıcı için yeni sayfalar oluşturacaktır.Bu da altta kalan veriler sık sık değiştiğinde harikadır.
 
 - SSR da veriyi alma ve html sayfasını işleme server da başlar.
@@ -185,6 +185,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 ### 1- Static Rendering:
 
+- Veriler neredeyse hiç değişmiyorsa dinamik sayfaya ihtiyaç yoktur. Next.JS te default olarak static sayfa olması sayesinde her zaman database e gitmek zorunda kalmayız.
 - HTML build yapıldığında ya da periyodik olarak arkaplanda yeniden veri yakalanmasıyla (ISR: Incremental Static Rendering) oluşturulur.
 - Veri sıklıkla değişmediğinde ve kişiselleştirilmediğinde kullanışlıdır.
 - Default olarak her zaman Next.JS static renderlama yapar.
@@ -266,7 +267,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 - `Data Cache`:
   - Cache olarak server'ı kullanır.
-  - Veri olarak bir route'da yakalanan verileri veya te bir fetch isteğini cache'e alır.
+  - Veri olarak bir route'da yakalanan verileri veya bir fetch isteğini cache'e alır.
   - Yakalanan veriler sonsuza kadar cache'de kalır. (Revalidate yapmak istesek bile)
   - Özellikle static sayfalar için kullanılır. Milyon tane kullanıcıya aynı verileri göstermek için mükemmeldir.
   - Açık ara geliştiriciler için düşünülmesi en önemli cache diyebiliriz.
@@ -274,8 +275,9 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
   - Time-based (otomatik) sayfadaki tüm veri için [ export const revalidate = time page.js'de ]
   - Time-based(otomatik) tek bir veri isteği için [ fetch(... , { next: { revalidate: time }}) ]
   - İsteğe bağlı olarak (manuel) revalidatePath veya revalidateTag
-  - Tüm sayfada Vazgeçmek/iptal etmek için ise export const revalidate = 0 page.js'de veya export const dynamic = "force-dynamic" yine page.js'de kullanabiliriz.
+  - Tüm sayfada vazgeçmek/iptal etmek için ise export const revalidate = 0 page.js'de veya export const dynamic = "force-dynamic" yine page.js'de kullanabiliriz.
   - Tek bir istek için Vazgeçmek/iptal etmek için fetch(... , { cache: 'no-store'}) veya Tek bir server komponent için noStore() fonksiyonu kullanılabilir.
+  -
 - `Full Route Cache`:
 
   - Cache olarak server'ı kullanır.
@@ -289,3 +291,31 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
   - Yeniden doğrulama için revalidatePath veya revalidateTag (Server Action'da)
   - router.refresh, cookies.set veya cookies.delete'de yine Server Action'da revalidate için kullanılabilir.
   - Vazgeçmek veya iptal etmek için herhangi bir yöntem yoktur.
+
+## Server ve Client Arasındaki İletişim (Server Client Boundary -Frontend & Backend)
+
+### Geleneksel İletişim (Traditional):
+
+- İletişim API ler ile sağlanır.
+- Client tan server a bir istek sonucunda json formatındaki veriler serverdan client a gönderilir.
+- Veriler üzerinde CRUD işlemleri yapmak için client, server a POST,PUT vb. isteklerde bulunur.
+-
+
+### Next.JS ile RSC + SA İletişim :
+
+- Server ve backend arasında net bir ayrım yoktur.
+- Aralarındaki sınırlar esnek ve dynamic tir.
+- Server ve client code parçaları iç içedir.(Knitting)
+- Tek bir kod tabanında gerçek full stack uygulamaları oluşturmamıza olanak sağlar
+- Artık veri getirmek için api ye ihtiyaç yoktur. Veritabanından okuyabilir veya prop olarak geçirebiliriz.
+- Verileri doğrudan istemci bileşenlerinden değiştirebilmek için Server Actions (SA) kullanabiliriz. Backend apisine yapacağımız post,put vb. isteklerin yerini alır.
+- Client componentin alt ağaçlarında server componentin olamayacağı düşünülse de bunu yapabilmenin bir yolu var: Server componentini bir prop olarak iletirsek, bir server bileşenini bir client bileşeninin içinde oluşturabiliriz.
+
+#### Dependency Tree (Module Imports):
+
+- Modüllerin diğer modüller tarafından içe aktarıldığını gösteren bir ağaçtır. Yani client-server sınırları bir component tree de değil, dependency tree de kurulmaktadır.
+- Client component lerin, server componentleri içe aktaramayacağı yalnızca diğer client componentlerini içe aktarabileceği anlamına gelir. Dolayısıyla client-server sınırına geri dönmek ve server componentlerini client tan içe aktarmak mümkün değildir. Ama server componentler, client componentlerine prop olarak aktarıldığı sürece client componentler bunları render edebilir.<br/>
+  <img src="/readme_img/dependency_tree.png" alt="dependency_tree">
+- Server componentler tüm bileşenleri içeri aktarabilir ve oluşturabilir.
+- Client-server sınırının içine aktarılan bir component, bir client componentleri örneği oluşturur. Yukarıdaki resimde C bir server mı client mı diye düşünecek olursak her ikisi de olabilir. Başta server iken daha sonra E içerisine alındığı için clienttır. E, "use-client"
+  ile clinte dönüştürüldüğünden alt propları da otomatik olarak client component olur.
