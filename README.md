@@ -315,7 +315,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 - Modüllerin diğer modüller tarafından içe aktarıldığını gösteren bir ağaçtır. Yani client-server sınırları bir component tree de değil, dependency tree de kurulmaktadır.
 - Client component lerin, server componentleri içe aktaramayacağı yalnızca diğer client componentlerini içe aktarabileceği anlamına gelir. Dolayısıyla client-server sınırına geri dönmek ve server componentlerini client tan içe aktarmak mümkün değildir. Ama server componentler, client componentlerine prop olarak aktarıldığı sürece client componentler bunları render edebilir.<br/>
-  <img src="/readme_img/dependency_tree.png" alt="dependency_tree">
+  <img src="/readme_img/dependency_tree.png" alt="dependency_tree" width="50%">
 - Server componentler tüm bileşenleri içeri aktarabilir ve oluşturabilir.
 - Client-server sınırının içine aktarılan bir component, bir client componentleri örneği oluşturur. Yukarıdaki resimde C bir server mı client mı diye düşünecek olursak her ikisi de olabilir. Başta server iken daha sonra E içerisine alındığı için clienttır. E, "use-client"
   ile clinte dönüştürüldüğünden alt propları da otomatik olarak client component olur.
