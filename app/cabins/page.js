@@ -5,6 +5,11 @@ import Spinner from "../_components/Spinner";
 export const metadata = {
   title: "Cabins",
 };
+
+//! Convert to dynamic - ISR (Middle ground between static and dynamic)
+// export const revalidate = 0;
+export const revalidate = 3600; //seconds
+
 export default function Cabins() {
   return (
     <div>
