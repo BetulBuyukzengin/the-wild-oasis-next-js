@@ -316,8 +316,17 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - Modüllerin diğer modüller tarafından içe aktarıldığını gösteren bir ağaçtır. Yani client-server sınırları bir component tree de değil, dependency tree de kurulmaktadır.
 - Client component lerin, server componentleri içe aktaramayacağı yalnızca diğer client componentlerini içe aktarabileceği anlamına gelir. Dolayısıyla client-server sınırına geri dönmek ve server componentlerini client tan içe aktarmak mümkün değildir. Ama server componentler, client componentlerine prop olarak aktarıldığı sürece client componentler bunları render edebilir.<br/>
 
-  <img src="/readme_img/dependency_tree.png" alt="dependency_tree" width="50%">
+  <img src="/readme_img/dependency_tree.png" alt="dependency_tree" width="50%"/>
 
 - Server componentler tüm bileşenleri içeri aktarabilir ve oluşturabilir.
-- Client-server sınırının içine aktarılan bir component, bir client componentleri örneği oluşturur. Yukarıdaki görselde C bir server mı client mı diye düşünecek olursak her ikisi de olabilir. Başta server iken daha sonra E içerisine alındığı için clienttır. E, "use-client"
-  ile clinte dönüştürüldüğünden alt propları da otomatik olarak client component olur.
+- Client-server sınırının içine aktarılan bir component, bir client componentleri örneği oluşturur. Yukarıdaki görselde C bir server mı client mı diye düşünecek olursak her ikisi de olabilir. Başta server iken daha sonra E içerisine alındığı için clienttır. E, `"use-client"` ile cliente dönüştürüldüğünden alt propları da otomatik olarak client component olur.
+
+#### Client tan Server a nasıl veri aktarırız?
+
+- Bunu yapabilmenin yolu state i url de saklamaktır.(searchParams)
+- Öncelikle `new URLSearchParams()` ile yeni url search params oluşturuyoruz. İçerisine parametre olarak `useSearchParams()`ı vermeliyiz.
+- Oluşturacağımız url search paramsa `set methodu` kullanarak key ve value vermeliyiz.
+- Projenin url ini değiştirmek için `useRouter()` hookunu ve `replace` methodunu kullanmalıyız.
+- `usePathname()` kullanarak mevcut URL yoluna (sayfanın yolunu) erişiriz.
+- Projemde kullandığım bir searcParams örneği:
+  <img src="/readme_img/searchParams.png" alt="searchParams" width="50%"/>
