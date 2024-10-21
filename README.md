@@ -152,7 +152,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 - Bazı asenkron işlemlerde henüz render edilmeye hazır olmayan bileşenleri yakalamak veya izole etmek için kullanabileceğimiz yerleşik bir react componentidir. Yani bu componentlerin hatta tüm alt ağaçların askıya alınmasıdır. Çünkü react tarafından renderlanmaya hazır değillerdir. Örneğin try-catch kavramı olarak düşündüğümüzde catch in hataları yakalaması gibi suspense de askıya alınan componentleri yakalar.
 - Bu bileşenleri suspense e sarmalıyız ve bu içerik yerine loader gösterebiliriz.
-- Asenkron olan bu componenti asenkron olmayan componentte çağırıp şu şekilde sarmalıyız:</br>
+- Asenkron olan bu componenti şu şekilde sarmalıyız:</br>
   `<Suspense fallback={<Spinner />}><ExampleComponent /></Suspense>`
 
 ### Bir componentin askıya alınmasına ne neden olur?
@@ -321,12 +321,52 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - Server componentler tüm bileşenleri içeri aktarabilir ve oluşturabilir.
 - Client-server sınırının içine aktarılan bir component, bir client componentleri örneği oluşturur. Yukarıdaki görselde C bir server mı client mı diye düşünecek olursak her ikisi de olabilir. Başta server iken daha sonra E içerisine alındığı için clienttır. E, `"use-client"` ile cliente dönüştürüldüğünden alt propları da otomatik olarak client component olur.
 
-#### Client tan Server a nasıl veri aktarırız?
+#### Client tan Server a nasıl veri aktarabiliriz?
 
-- Bunu yapabilmenin yolu state i url de saklamaktır.(searchParams)
-- Öncelikle `new URLSearchParams()` ile yeni url search params oluşturuyoruz. İçerisine parametre olarak `useSearchParams()`ı vermeliyiz.
-- Oluşturacağımız url search paramsa `set methodu` kullanarak key ve value vermeliyiz.
-- Projenin url ini değiştirmek için `useRouter()` hookunu ve `replace` methodunu kullanmalıyız.
-- `usePathname()` kullanarak mevcut URL yoluna (sayfanın yolunu) erişiriz.
-- Projemde kullandığım bir searcParams örneği:
-  <img src="/readme_img/searchParams.png" alt="searchParams" width="50%"/>
+- State i url de saklama (searchParams) :
+
+  - Öncelikle `new URLSearchParams()` ile yeni url search params oluşturuyoruz. İçerisine parametre olarak `useSearchParams()`ı vermeliyiz.
+  - Oluşturacağımız url search paramsa `set methodu` kullanarak key ve value vermeliyiz.
+  - Projenin url ini değiştirmek için `useRouter()` hookunu ve `replace` methodunu kullanmalıyız.
+  - `usePathname()` kullanarak mevcut URL yoluna (sayfanın yolunu) erişiriz.
+  - Projemde kullandığım bir searcParams örneği:<br/>
+    <img src="/readme_img/searchParams.png" alt="searchParams" width="50%"/>
+
+#### NEXT.JS' te Context API:
+
+- Context api, client componentler için çalışır. Çünkü bunlar contextten verileri okumak için gerekli hookları kullanabilir.<br/>
+  <img src="/readme_img/contextAPI.png" alt="searchParams" width="50%"/>
+
+- <!-- Dedemlerde yazdıklarım -->
+
+#### Route Handlers ile API Endpoint oluşturma
+
+- **Route Dosyası Oluşturma**: Route adında başka bir konvansiyon dosyası oluşturarak bir route işleyicisi oluşturabiliriz.
+  Bu durumda ve bu route da js dosyası, sayfası olmayan herhangi bir klasörde olabilir.Route işleyicileri, URL'lere gelen istekleri (GET, POST, vb.) işlemek için kullanılır.
+  Bu önemlidir çünkü route işleyicisine karşılık gelen URL' ye bir istek gönderildiğinde HTML döndürülmez,
+  bunun yerine route işleyicisi çalıştırılır ve genellikle bazı JSON verileri döndürülür.
+
+- **Endpoint**: Bir API'de belirli bir kaynak veya hizmete erişim sağlayan bir URL veya URI'dir.
+  Bir endpoint, istemcinin sunucuyla iletişim kurmasını sağlar ve genellikle belirli bir işlev veya
+  veri kümesi ile ilişkilidir. API çağrıları, bu endpointlere yapılarak veri almak, veri göndermek, güncellemek
+  veya silmek gibi işlemler gerçekleştirilir. Her bir endpoint, belirli bir işlem için tasarlanmıştır ve genellikle bir HTTP metoduyla (GET, POST, PUT, DELETE) birlikte kullanılır.
+  Bu sayede, istemciler (örneğin, web uygulamaları veya mobil uygulamalar) belirli işlevleri gerçekleştirebilir.
+
+- **Klasör Yapısı**: API endpointleri genellikle api klasörü altında yer alır. Örneğin, api/cabins/[cabinId]/route.js yapısı kullanılarak dinamik bir endpoint oluşturabilirsiniz.
+  Burada [cabinId], dinamik bir parametre olup, URL’de gerçek bir kabin kimliğini temsil eder.
+  Bu yapı, belirli bir kabin ile ilgili verilere erişim sağlamak için kullanılır.
+- **HTML ve JSON Çatışması**: Route işleyicileri, bir URL'ye yapılan isteklerde HTML yerine genellikle JSON
+  verileri döndürür. Eğer bir sayfada aynı isimde bir JavaScript dosyası varsa, bu bir çakışmaya neden olabilir.
+  Çünkü bir HTTP isteği için HTML ve JSON verileri aynı anda gönderilemez. Bu nedenle, route işleyicisinin
+  bulunduğu klasörün dikkatlice yapılandırılması önemlidir.
+
+- **Özelleştirilmiş Soyutlama**: Route Handlers, API'nizi kullanımı kolay hale getirmek için özelleştirilmiş
+  bir soyutlama sunar. Bu sayede, veri yönetimini daha etkin bir şekilde gerçekleştirebilir ve uygulamanızın
+  ihtiyaçlarına göre özelleştirilmiş çözümler oluşturabilirsiniz.
+- **BURADAKİ KODU DENE URL DE 90 GELİYOR MU İNTERNETSİZ GELMEDİ!!!**
+- **Veri Kaynakları ve Güvenlik**: Supabase in halka açık olmayan bölümlerinden farklı veri kaynaklarını kolayca bir araya getirebiliriz. Bunu yaparken api anahtarlarımızı da gizli tutabiliriz.
+- **Hata Yönetimi**: try catch yapısı ile hata durumlarını ele alabiliriz.
+- **Server Actions**: Route Handlers, bazı durumlarda daha az kullanılmaktadır çünkü yeni geliştirmelerle
+  birlikte "server actions" gibi alternatif yöntemler ortaya çıkmıştır. Server actions, belirli bir görevi
+  daha kolay ve verimli bir şekilde yerine getirmek için kullanılabilir.
+- `https://developer.mozilla.org/en-US/docs/Web/API/Response`
