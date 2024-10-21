@@ -29,10 +29,12 @@
     }
   }
 }
+
 /* For data picker */
-/* .rdp {
+.rdp {
   --rdp-cell-size: 32px !important;
   --rdp-accent-color: theme("colors.accent.500") !important;
   --rdp-background-color: theme("colors.accent.600") !important;
+  --rdp-range_middle-background-color: theme("colors.accent.500") !important;
   margin: 0 !important;
-} */
+}
