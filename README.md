@@ -370,3 +370,17 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
   birlikte "server actions" gibi alternatif yöntemler ortaya çıkmıştır. Server actions, belirli bir görevi
   daha kolay ve verimli bir şekilde yerine getirmek için kullanılabilir.
 - `https://developer.mozilla.org/en-US/docs/Web/API/Response`
+
+## Next Auth kütüphanesi ile kimlik doğrulama (authentication)
+
+- `https://next-auth.js.org/getting-started/introduction`
+- Google provider - google hesaplarıyla giriş yapma
+- **İlk önce next.auth u kuralım**: Kimlik doğrulamayı basitleştiren kütüphane.(Alternatifi clerk veya lucia )
+- lib klasörü içinde auth.js adında dosya oluşturmalıyız.
+- env.local içine NEXTAUTH_URL=http://localhost:300 (projenın urli) ü ve NEXTAUTH_SECRET= değerine vercelin generate secret adlı uygulamasından gelen değeri vermeliyiz (Daha güvenli)
+- `Google developer console`: Geliştiricilerin Google'ın çeşitli hizmetleri ve API'lerini kullanarak projeler oluşturmasına, yönetmesine ve izlemelerine olanak tanıyan bir web platformudur. Geliştiriciler bu konsolu kullanarak uygulamalarını Google altyapısı üzerinde geliştirebilir ve dağıtabilirler.O yüzden google developer console da hesap oluşturmalıyız.
+  - Öncelikle `OAuth consent screen` sayfasına giderek kullanıcının google hesabıyla giriş yaptığında göreceği ekranı oluşturalım.
+  - Daha sonra `Credentials` da OAuth Client ID yi oluşturalım.`https://next-auth.js.org/providers/google`
+  - Oluşturduktan sonra client ID ve client secret i env.local e ekleyelim.
+  - `auth` dosyasında `NextAuth` ve `Google` u import ederek config objesi oluşturalım. Ve `NextAuth` a parametre olarak exportlayalım.
+  - Api klasörünün içerisine `auth/[...nextauth]/route.js` şeklinde bir route oluşturalım. (3 nokta tümünü almak için) Burada `GET` ve `POST` u export edelim.
