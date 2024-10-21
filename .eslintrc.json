@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-unused-vars": "warn", // Kullanılmayan değişkenler için uyarı verir
+    "react/jsx-uses-react": "error", // React JSX kullanımı için ek kural
+    "react/jsx-uses-vars": "error" // JSX içinde tanımlanan değişkenlerin kullanımı
+  }
 }
