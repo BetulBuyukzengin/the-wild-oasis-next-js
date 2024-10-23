@@ -14,9 +14,15 @@ const authConfig = {
       return !!auth?.user;
     },
   },
+  //! Redirect to a specially created login page
+  pages: {
+    signIn: "/login",
+  },
 };
 
 export const {
   auth,
+  signIn,
+  signOut,
   handlers: { GET, POST },
 } = NextAuth(authConfig);
