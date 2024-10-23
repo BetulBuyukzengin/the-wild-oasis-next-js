@@ -385,3 +385,22 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
   - `auth` dosyasında `NextAuth` ve `Google` u import ederek config objesi oluşturalım. Ve `NextAuth` a parametre olarak exportlayalım.
   - Api klasörünün içerisine `auth/[...nextauth]/route.js` şeklinde bir route oluşturalım. (3 nokta tümünü almak için) Burada `GET` ve `POST` u export edelim.
   - **await auth()** ile googledan gelen kullanıcı bilgilerine erişebiliriz. Bu kimlik doğrulama işlevinin gelen istekten bu çerezleri okuması gerekir. Çerezler yalnızca çalışma zamanında bilinebilir. Dolayısıyla bu siteyi statik olarak oluştursaydık oturum açacak kullanıcıları bilemezdik._Sonuç olarak auth u navigationda kullandığım için ve bu tüm route ların bir parçası olduğu için tüm route lar dinamik oldu_.
+
+## Next.JS te Middleware nedir?
+
+- Authorization ı uygulamak için kullanılır.
+- Request ve response arasında yer alan bir işlvdir. Request e bağlı olan ama response tamamlanmadan önce bazı kodları çalıştırmamızı sağlar.
+- Bir projede default olarak her route tan önce çalışır.
+- Middleware default olarak her route için çalıştığından sonsuz döngü oluşturur sürekli yönlendirme yapar. Middleware in hangi route larda çalışması gerektiğini belirtmek için **matcher** olarak adlandırılan bir araç kullanabiliriz. Ancak önemli olan nokta, her zaman request ten sonra ancak kullanıcının ziyaret ettiği route işlenmeden ve geri gönderilmeden önce çalışmasıdır.
+- Her bir route a (sayfaya) yapıştırdığımız bir kod yığını olarak düşünebiliriz. Ancak bunu yapmak yerine, bu kod yığını her route tan önce çalışan tek bir merkezi yerde bulunur. Bu da middleware dır.
+- Sadece bir middleware fonksiyonu olmalıdır. Proje root klasöründeki middleware.js (veya .ts) dosyasından dışa aktarılması (export) gerekir.
+- auth middleware olarak da hizmet eder.
+- **Buna neden ihtiyacımız var? :**
+  - Cookies ve headers ı okumamızı ve ayarlamamızı (set) sağlar.
+  - Authentication ve authorization
+  - Server-side analizler,
+  - Coğrafi konuma dayalı yönlendirmeler
+  - A/B testi
+- Middleware in bir response üretmesinin yolu 2 şekilde gerçekleşir:
+  1- Middleware in uygulamamızdaki bazı route lara yeniden yönlendirmesi veya yeniden yazması ya da route lar oluşturulmadan önce çalışmasıdır.
+  2- İstemciye doğrudan bir JSON yanıtı göndermek. Bu durumda cookie ve header ları okuyabilir ve ayarlayabiliriz. Fakat bu durumda route a hiç ulaşılmayacak ve işlenmeyecektir. Bu nedenle tamamen atlanır.
