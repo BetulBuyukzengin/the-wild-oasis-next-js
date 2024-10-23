@@ -384,3 +384,4 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
   - Oluşturduktan sonra client ID ve client secret i env.local e ekleyelim.
   - `auth` dosyasında `NextAuth` ve `Google` u import ederek config objesi oluşturalım. Ve `NextAuth` a parametre olarak exportlayalım.
   - Api klasörünün içerisine `auth/[...nextauth]/route.js` şeklinde bir route oluşturalım. (3 nokta tümünü almak için) Burada `GET` ve `POST` u export edelim.
+  - **await auth()** ile googledan gelen kullanıcı bilgilerine erişebiliriz. Bu kimlik doğrulama işlevinin gelen istekten bu çerezleri okuması gerekir. Çerezler yalnızca çalışma zamanında bilinebilir. Dolayısıyla bu siteyi statik olarak oluştursaydık oturum açacak kullanıcıları bilemezdik._Sonuç olarak auth u navigationda kullandığım için ve bu tüm route ların bir parçası olduğu için tüm route lar dinamik oldu_.
