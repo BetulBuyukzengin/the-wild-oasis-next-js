@@ -404,3 +404,5 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - Middleware in bir response üretmesinin yolu 2 şekilde gerçekleşir:
   1- Middleware in uygulamamızdaki bazı route lara yeniden yönlendirmesi veya yeniden yazması ya da route lar oluşturulmadan önce çalışmasıdır.
   2- İstemciye doğrudan bir JSON yanıtı göndermek. Bu durumda cookie ve header ları okuyabilir ve ayarlayabiliriz. Fakat bu durumda route a hiç ulaşılmayacak ve işlenmeyecektir. Bu nedenle tamamen atlanır.
+- SigninButtonda server component olduğundan onClick yerine _form action_ kulandım.
+- lib klasörü içine actions.js oluştur.İçerisinde `use server` ve gerekli fonksiyonları ekle.
