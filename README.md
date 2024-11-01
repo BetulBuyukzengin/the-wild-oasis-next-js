@@ -404,5 +404,44 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - Middleware in bir response üretmesinin yolu 2 şekilde gerçekleşir:
   1- Middleware in uygulamamızdaki bazı route lara yeniden yönlendirmesi veya yeniden yazması ya da route lar oluşturulmadan önce çalışmasıdır.
   2- İstemciye doğrudan bir JSON yanıtı göndermek. Bu durumda cookie ve header ları okuyabilir ve ayarlayabiliriz. Fakat bu durumda route a hiç ulaşılmayacak ve işlenmeyecektir. Bu nedenle tamamen atlanır.
-- SigninButtonda server component olduğundan onClick yerine _form action_ kulandım.
+- SigninButton da server component olduğundan onClick yerine _form action_ kulandım.
 - lib klasörü içine actions.js oluştur.İçerisinde `use server` ve gerekli fonksiyonları ekle.
+- SignOutButton bir client componenttir. Teknik olarak onClick verebiliriz fakat form action kullandım. Çünkü server action lar client ta da çağırılabilirler ve yalnızca server da yürütülebilirler (execute).
+- Google hesabıyla giriş yapıldığında bu hesap supabase tablosunda mevcut kulanıcılar içerisinde yoksa, auth içinde signIn callbacki oluşturarak yeni kullanıcı oluşturma işlevini ekledim.
+
+---
+
+## React Server Component Architecture
+
+- Next.JS kullanmamızın en önemli sebeplerinden biri React ile kolayca etkileşimli full stack uygulamaları oluşturmak. React ekibi, geliştiricilerin bunu yapabilmesine yardımcı olmak için React Server Component Architecture u oluşturdu.
+- -**1- Data Fetch**: Data fetch(veri getirme) işlemlerini server componentleri kullanarak yaparız.
+- -**2- Mutation**: Mutation işlemleri için `server actions` ı kullanırız.
+
+- Server actions için full stack application ları oluşturmada RSC mimarisindeki eksik parça diyebiliriz.
+- Yalnızca sunucuda çalışan asenkron fonksiyonlar, veri mutasyonlarını gerçekleştirmemizi sağlar.
+- Fonksiyonun veya tüm module ün en üstünde `"use server"` yönergesi ile oluşturulur.
+
+### Server Action ları 2 şekilde tanımlayabiliriz:
+
+- 1- **Bir server componentte bir asenkron fonksiyon**: Doğrudan server componentinin içerisinde tanımlanabilir, burada doğrudan kullanılabilir veya bir client bileşenine prop olarak aktarılabilir.(fonksiyonların aksine).
+- 2- **Bağımsız dosya**: _use server_ yönergesi ile başlaması gereken özel bir server action modülüdür. Daha sonra bu dosyadan dışa aktardığımız tüm fonksiyonlar basitçe server actions haline gelir ve bunlar daha sonra herhangi bir server a veya hatta client componente aktarılabilir.Bu sayede tüm mutation lar tek bir merkezi yerde saklanır.(önerilir)
+
+-**use server**, server componentler için değil sadece _server actions_ içindir.
+
+- use client, kodumuzun server dan client a geçmesini sağlayan bir köprü gibidir; use server ise bunun tersine çalışır. Böylece client ile server arasındaki boşluğu doldurur.(Api endpointe ihtiyaç duyulursa kullanmalıyız.)
+- **Server Actions çalışma şekli**: Next.JS oluşturduğumuz her server action için otomatik olarak bir API endpoint oluşturacaktır. Böylece her server action, temel olarak client a gönderilen kendi URL sini alır. Bu nedenle işlevin kendisinin asla client a ulaşmadığını, yalnızca URL' ye ulaştığını unutmamak önemlidir. Bu kodun kendisinin her zaman server da kalacağı ve bu nedenle server actions ında veritabanlarına doğrudan bağlanmanın, gizli API anahtarları kullanmanın vb. güvenli olduğu anlamına gelir. Çünkü kodun tarayıcıya sızdırılması imkansızdır.
+- Server action bir kullanıcı etkileşimi sonucunda her çağrıldığında sahne arkasında uç noktaya bir POST isteği yapılacak ve istek boyunca gönderilen tüm girdiler serileştirilecektir. Ancak geliştiriciler olarak bir API end pointi veya URL yi asla görmeyiz veya kullanmayız. Bunların hepsi server action da soyutlanmıştır.
+- Server actions ın en büyük faydası artık manuel olarak bir api veya data mutation için route handlers oluşturmamıza gerek kalmamasıdır.
+- Server actions derleme zamanında çalışmaz çünkü canlı bir web sunucusu olmadan çağrılacak ve uygulama ile etkileşime giren kullanıcılara yanıt olarak yürütülecek api endpointleri olmaz.
+- Server actions, genellikle form gönderimlerini işlemek için kullanılır. Yani server action u normal bir form ögesinin eylem niteliği olarak kullanabiliriz. Bu form ister bir server ister bir client componente yerleştirilmiş olsun. Frontend de herhangi bir ek kod olmadan sadece formların çalışmasını sağlarlar. Ve yine bu formun bir server bileşeni veya client bileşeni olması bile önemli değildir.
+- Böylece formlar tüm form verilerini otomatik olarak alır ve perde arkasında sağlanan api endpointi kullanarak serileştirilmiş bir biçimde server action a gönderir. Server action daha sonra istersek yanıt verebilir ve daha sonra bu yanıtı ele alabiliriz. Artık formların yanı sıra server action larda event handlers(sadece client components) ve useEffect teki (sadece client components) regular functions gibi çağrılabilir
+
+#### Server actions ile neler yapabiliriz?
+
+- Data mutations
+- Yeni verilerle UI ı güncelleme: Her data mutation işlemi gerçekleştirdiğimizde veri önbelleğini manuel olarak yeniden doğrulamalıyız. revalidatePath ve revalidateTag ile önbelleği talep üzerine kolayca yeniden doğrulayabiliriz.
+- Cookies ile çalışabiliriz.
+- Gerçekleştirdiğimiz action ile ilgili olduğu sürece burada istediğimiz kodları çalıştırabiliriz.
+- Server action kullanırken kodun backend de çalıştığını ve bu nedenle girdilerin güvenli olmadığını varsaymamız gerekiyor
+
+- Tarayıcı önbelleği dinamik sayfaları ve dinamik route ları 30 saniye tutar.
