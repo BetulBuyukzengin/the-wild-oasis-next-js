@@ -447,3 +447,5 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - Tarayıcı önbelleği dinamik sayfaları ve dinamik route ları 30 saniye tutar.
 - Server action kullandığımızda önbelleği yeniden doğrulamak çok önemlidir!(revalidatePath() ve revalidateTag())
   Mesela contact form için düşündüğümüzde yeniden doğrulamaya ihtiyacımız olmayacaktı çünkü bilgiler ekranda gösterilmeyecekti.
+- **useFormStatus():** React DOM'un sağladığı bir hook'tur ve form durumunu yönetmek için kullanılır. Bu hook, form gönderme sürecindeki durumları izlemeyi sağlar ve genellikle asenkron form işlemleri sırasında kullanılır. Örneğin, bir form gönderildiğinde, useFormStatus() sayesinde formun gönderilip gönderilmediğini veya gönderme işleminin hala devam edip etmediğini kontrol edebilirsiniz. Örneğin, useFormStatus() tan _pending_ durumunu alarak "updating" bildirimi gösterebiliriz.
+- useFormStatus() hook'u doğrudan form içeren bir component'te kullanamayız, yalnızca client tarafında çalışan componentlerde çalışır. Bu yüzden, form durumunu izlemek için useFormStatus()'u bir client component içinde, formu saran bir alt componentte (client olmalı) kullanabilirsiniz.
