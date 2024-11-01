@@ -439,9 +439,11 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 #### Server actions ile neler yapabiliriz?
 
 - Data mutations
-- Yeni verilerle UI ı güncelleme: Her data mutation işlemi gerçekleştirdiğimizde veri önbelleğini manuel olarak yeniden doğrulamalıyız. revalidatePath ve revalidateTag ile önbelleği talep üzerine kolayca yeniden doğrulayabiliriz.
+- Yeni verilerle UI ı güncelleme: Her data mutation işlemi gerçekleştirdiğimizde veri önbelleğini manuel olarak yeniden doğrulamalıyız. revalidatePath() ve revalidateTag() ile önbelleği talep üzerine kolayca yeniden doğrulayabiliriz.
 - Cookies ile çalışabiliriz.
 - Gerçekleştirdiğimiz action ile ilgili olduğu sürece burada istediğimiz kodları çalıştırabiliriz.
 - Server action kullanırken kodun backend de çalıştığını ve bu nedenle girdilerin güvenli olmadığını varsaymamız gerekiyor
 
 - Tarayıcı önbelleği dinamik sayfaları ve dinamik route ları 30 saniye tutar.
+- Server action kullandığımızda önbelleği yeniden doğrulamak çok önemlidir!(revalidatePath() ve revalidateTag())
+  Mesela contact form için düşündüğümüzde yeniden doğrulamaya ihtiyacımız olmayacaktı çünkü bilgiler ekranda gösterilmeyecekti.
