@@ -4,6 +4,7 @@ import { updateGuest } from "../_lib/actions";
 import { useFormStatus } from "react-dom";
 function UpdateProfileForm({ children, guest }) {
   const { fullName, email, nationality, nationalID, countryFlag } = guest;
+
   return (
     <form
       action={updateGuest}
@@ -65,6 +66,7 @@ function UpdateProfileForm({ children, guest }) {
 }
 
 export default UpdateProfileForm;
+//! Display a loading indicator with useForStatus Hook
 function Button() {
   const { pending } = useFormStatus();
   return (
