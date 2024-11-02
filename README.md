@@ -366,9 +366,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - **BURADAKİ KODU DENE URL DE 90 GELİYOR MU İNTERNETSİZ GELMEDİ!!!**
 - **Veri Kaynakları ve Güvenlik**: Supabase in halka açık olmayan bölümlerinden farklı veri kaynaklarını kolayca bir araya getirebiliriz. Bunu yaparken api anahtarlarımızı da gizli tutabiliriz.
 - **Hata Yönetimi**: try catch yapısı ile hata durumlarını ele alabiliriz.
-- **Server Actions**: Route Handlers, bazı durumlarda daha az kullanılmaktadır çünkü yeni geliştirmelerle
-  birlikte "server actions" gibi alternatif yöntemler ortaya çıkmıştır. Server actions, belirli bir görevi
-  daha kolay ve verimli bir şekilde yerine getirmek için kullanılabilir.
+- **Server Actions**: Route Handlers, bazı durumlarda daha az kullanılmaktadır çünkü yeni geliştirmelerle birlikte "server actions" gibi alternatif yöntemler ortaya çıkmıştır. Server actions, belirli bir görevi daha kolay ve verimli bir şekilde yerine getirmek için kullanılabilir.
 - `https://developer.mozilla.org/en-US/docs/Web/API/Response`
 
 ## Next Auth kütüphanesi ile kimlik doğrulama (authentication)
@@ -433,8 +431,9 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - Server action bir kullanıcı etkileşimi sonucunda her çağrıldığında sahne arkasında uç noktaya bir POST isteği yapılacak ve istek boyunca gönderilen tüm girdiler serileştirilecektir. Ancak geliştiriciler olarak bir API end pointi veya URL yi asla görmeyiz veya kullanmayız. Bunların hepsi server action da soyutlanmıştır.
 - Server actions ın en büyük faydası artık manuel olarak bir api veya data mutation için route handlers oluşturmamıza gerek kalmamasıdır.
 - Server actions derleme zamanında çalışmaz çünkü canlı bir web sunucusu olmadan çağrılacak ve uygulama ile etkileşime giren kullanıcılara yanıt olarak yürütülecek api endpointleri olmaz.
-- Server actions, genellikle form gönderimlerini işlemek için kullanılır. Yani server action u normal bir form ögesinin eylem niteliği olarak kullanabiliriz. Bu form ister bir server ister bir client componente yerleştirilmiş olsun. Frontend de herhangi bir ek kod olmadan sadece formların çalışmasını sağlarlar. Ve yine bu formun bir server bileşeni veya client bileşeni olması bile önemli değildir.
+- Server actions, genellikle _form_ gönderimlerini işlemek için kullanılır. Yani server action u normal bir form ögesinin eylem niteliği olarak kullanabiliriz. Bu form ister bir server ister bir client componente yerleştirilmiş olsun. Frontend de herhangi bir ek kod olmadan sadece formların çalışmasını sağlarlar. Ve yine bu formun bir server bileşeni veya client bileşeni olması bile önemli değildir.
 - Böylece formlar tüm form verilerini otomatik olarak alır ve perde arkasında sağlanan api endpointi kullanarak serileştirilmiş bir biçimde server action a gönderir. Server action daha sonra istersek yanıt verebilir ve daha sonra bu yanıtı ele alabiliriz. Artık formların yanı sıra server action larda event handlers(sadece client components) ve useEffect teki (sadece client components) regular functions gibi çağrılabilir
+- Server actions, formlarda kullanıldığı gibi _butonlarda_ da onClickte callback olarak kullanılır.
 
 #### Server actions ile neler yapabiliriz?
 
@@ -449,3 +448,4 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
   Mesela contact form için düşündüğümüzde yeniden doğrulamaya ihtiyacımız olmayacaktı çünkü bilgiler ekranda gösterilmeyecekti.
 - **useFormStatus():** React DOM'un sağladığı bir hook'tur ve form durumunu yönetmek için kullanılır. Bu hook, form gönderme sürecindeki durumları izlemeyi sağlar ve genellikle asenkron form işlemleri sırasında kullanılır. Örneğin, bir form gönderildiğinde, useFormStatus() sayesinde formun gönderilip gönderilmediğini veya gönderme işleminin hala devam edip etmediğini kontrol edebilirsiniz. Örneğin, useFormStatus() tan _pending_ durumunu alarak "updating" bildirimi gösterebiliriz.
 - useFormStatus() hook'u doğrudan form içeren bir component'te kullanamayız, yalnızca client tarafında çalışan componentlerde çalışır. Bu yüzden, form durumunu izlemek için useFormStatus()'u bir client component içinde, formu saran bir alt componentte (client olmalı) kullanabilirsiniz.
+- Server action yaptığımızda ve daha sonra bu actionın sonucunun kullanıcı arayüzüne anında yansıtılmasını istediğimizde gerekli verileri yeniden almak gerekir. Yani cache de yeniden doğrulama yapmak gerekir. Bunu revalidatePath ya da revalidateTag ile yaparız. **(revalidate cache)**.
