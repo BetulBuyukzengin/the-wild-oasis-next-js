@@ -449,7 +449,13 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - **useFormStatus():** React DOM'un sağladığı bir hook'tur ve form durumunu yönetmek için kullanılır. Bu hook, form gönderme sürecindeki durumları izlemeyi sağlar ve genellikle asenkron form işlemleri sırasında kullanılır. Örneğin, bir form gönderildiğinde, useFormStatus() sayesinde formun gönderilip gönderilmediğini veya gönderme işleminin hala devam edip etmediğini kontrol edebilirsiniz. Örneğin, useFormStatus() tan _pending_ durumunu alarak "updating" bildirimi gösterebiliriz.
 - useFormStatus() hook'u doğrudan form içeren bir component'te kullanamayız, yalnızca client tarafında çalışan componentlerde çalışır. Bu yüzden, form durumunu izlemek için useFormStatus()'u bir client component içinde, formu saran bir alt componentte (client olmalı) kullanabilirsiniz.
 - Server action yaptığımızda ve daha sonra bu actionın sonucunun kullanıcı arayüzüne anında yansıtılmasını istediğimizde gerekli verileri yeniden almak gerekir. Yani cache de yeniden doğrulama yapmak gerekir. Bunu revalidatePath ya da revalidateTag ile yaparız. **(revalidate cache)**.
+- `revalidatePath("/account/reservations")`
 - **useTransition**:Spinner göstermenin useFormStatus dışında bir diğer yolu da useTransition() kullanmaktır.startTransition ile işlevi sararak isPending ile spinnerı kondisyonel olarak renderlayabiliriz. Yani, Bir state güncellemesini sözde bir transition olarak işaretlememizi sağlar. Ve bir state güncellemesi useTransition hooku kullanılarak bir transition olarak işaretlendiğinde bu state güncellemesi kullanıcı arayüzünü engellemeden gerçekleşecektir. Bu da kullanıcı arayüzünün yeniden oluşturma sırasında duyarlı kalacağı anlamına gelir ve ayrıca state transition gerçekleştiğine dair bir gösterge alırız. Reactta kullanıcı arayüzünü engelleyebilecek çok çok state güncellemeleri için yararlı olabilir.
+
+# Redirect
+
+- Sayfa yönlendirme için redirect kullanabiliriz:
+- `redirect("/account/reservations")`:
 
 # useOptimistic Hook
 
