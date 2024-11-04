@@ -465,4 +465,10 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - `const [optimisticBookings,optimisticDelete]=useOptimistic(bookings,(curBookings,bookingId)=>{ return curBookings.filter((booking)=>booking.id!==bookingId)})`:
   - useOptimistic 2 parametre alır. İlki başlangıçta döndürülecek olan mevcut değer ayrıca herhangi bir async action çalışmıyorken yani herhangi bir server action beklemedeyken işlenecek durum; ikincisi bir sonraki optimistic durumu belirleyecek olan durum güncelleme fonksiyonudur. Bu her zaman current state i ve ardından bu optimistic state i hesaplamak için gerekli olan bazı yeni bilgileri alır.
   - useOptimistic ten alınan değerlerin ilki optimistic state, başlangıçta ve o anda çalışan bir async action yokken döndürülecek olan durumdur; ikinci ise setter function dır. Kullanıcı delete butonuna her tıkladığında kullanılacak fonksiyondur. Böylece durum sayfadan hemen kaybolacaktır.
-  - <img src="/readme_img/useOptimisticHook.png" alt="useOptimisticHook" width="50%">
+    - <img src="/readme_img/useOptimisticHook.png" alt="useOptimisticHook" width="50%">
+
+# bind() methodu:
+
+- Formdan gelen verilere action dan erişebiliyorduk. Form dışındaki verilere erişmek için gizli inputlar ekliyorduk. Eğer veriler çok ise **bind() methodu**nu kullanabiliriz.
+  - <img src="/readme_img/bindMethodUsing.png.png" alt="bindMethodUse" width="50%">
+  - <img src="/readme_img/createBookingAction.png" alt="createBookingAction" width="50%">
