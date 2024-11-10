@@ -470,5 +470,8 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 # bind() methodu:
 
 - Formdan gelen verilere action dan erişebiliyorduk. Form dışındaki verilere erişmek için gizli inputlar ekliyorduk. Eğer veriler çok ise **bind() methodu**nu kullanabiliriz.
-  - <img src="/readme_img/bindMethodUsing.png.png" alt="bindMethodUse" width="50%">
+  - <img src="/readme_img/bindMethodUsing.png" alt="bindMethodUse" width="50%">
   - <img src="/readme_img/createBookingAction.png" alt="createBookingAction" width="50%">
+    <!-- zod new booking verileri  için bir de burada breakfast durumunu ayarlamadık arayuzeekleyıp burdan aluesunu da ayarlayabilirsin.
+    ,stripe ile online odeme
+    -->
