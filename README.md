@@ -337,7 +337,6 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - Context api, client componentler için çalışır. Çünkü bunlar contextten verileri okumak için gerekli hookları kullanabilir.<br/>
   <img src="/readme_img/contextAPI.png" alt="searchParams" width="50%"/>
 
-- <!-- Dedemlerde yazdıklarım -->
 
 #### Route Handlers ile API Endpoint oluşturma
 
@@ -363,7 +362,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - **Özelleştirilmiş Soyutlama**: Route Handlers, API'nizi kullanımı kolay hale getirmek için özelleştirilmiş
   bir soyutlama sunar. Bu sayede, veri yönetimini daha etkin bir şekilde gerçekleştirebilir ve uygulamanızın
   ihtiyaçlarına göre özelleştirilmiş çözümler oluşturabilirsiniz.
-- **BURADAKİ KODU DENE URL DE 90 GELİYOR MU İNTERNETSİZ GELMEDİ!!!**
+
 - **Veri Kaynakları ve Güvenlik**: Supabase in halka açık olmayan bölümlerinden farklı veri kaynaklarını kolayca bir araya getirebiliriz. Bunu yaparken api anahtarlarımızı da gizli tutabiliriz.
 - **Hata Yönetimi**: try catch yapısı ile hata durumlarını ele alabiliriz.
 - **Server Actions**: Route Handlers, bazı durumlarda daha az kullanılmaktadır çünkü yeni geliştirmelerle birlikte "server actions" gibi alternatif yöntemler ortaya çıkmıştır. Server actions, belirli bir görevi daha kolay ve verimli bir şekilde yerine getirmek için kullanılabilir.
