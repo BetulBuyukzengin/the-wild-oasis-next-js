@@ -11,13 +11,13 @@ export default async function About() {
   const cabins = await getCabins();
 
   return (
-    <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
-      <div className="col-span-3">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+    <div className="grid grid-cols-4 lg:grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
+      <div className="col-span-4 lg:col-span-3 ">
+        <h1 className="text-2xl lg:text-4xl mb-10 text-accent-400 font-medium">
           Welcome to The Wild Oasis
         </h1>
 
-        <div className="space-y-8">
+        <div className="space-y-8 text-sm lg:text-base">
           <p>
             Where nature&apos;s beauty and comfortable living blend seamlessly.
             Hidden away in the heart of the Italian Dolomites, this is your
@@ -39,9 +39,10 @@ export default async function About() {
         </div>
       </div>
 
-      <div className="col-span-2">
+      <div className="col-span-4 lg:col-span-2">
         {/* To have a sensitive image. */}
         <Image
+          className="pr-4"
           src={image1}
           alt="Family sitting around a fire pit in front of cabin"
           placeholder="blur"
@@ -49,22 +50,22 @@ export default async function About() {
         />
       </div>
 
-      <div className="relative aspect-square col-span-2">
+      <div className="relative aspect-square col-span-4 lg:col-span-2">
         {/* For any image available on the computer. */}
         <Image
           src="/about-2.jpg"
           fill
-          className="object-cover"
+          className="object-cover pr-4"
           alt="Family that manages The Wild Oasis"
         />
       </div>
 
-      <div className="col-span-3">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+      <div className="col-span-4 lg:col-span-3 items-center">
+        <h1 className="text-2xl lg:text-4xl mb-10 text-accent-400 font-medium">
           Managed by our family since 1962
         </h1>
 
-        <div className="space-y-8">
+        <div className="space-y-8 text-sm lg:text-base flex items-center flex-col">
           <p>
             Since 1962, The Wild Oasis has been a cherished family-run retreat.
             Started by our grandparents, this haven has been nurtured with love
@@ -83,7 +84,7 @@ export default async function About() {
           <div>
             <a
               href="/cabins"
-              className="inline-block mt-4 bg-accent-500 px-8 py-5 text-primary-800 text-lg font-semibold hover:bg-accent-600 transition-all"
+              className="inline-block mt-4 bg-accent-500 rounded-sm px-4 lg:px-8 py-2 lg:py-5 text-primary-800 text-sm lg:text-lg font-semibold hover:bg-accent-600 transition-all"
             >
               Explore our luxury cabins
             </a>

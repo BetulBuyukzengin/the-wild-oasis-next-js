@@ -4,10 +4,20 @@ import { UsersIcon } from "@heroicons/react/24/solid";
 
 function CabinCard({ cabin }) {
   const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
-
   return (
-    <div className="flex border-primary-800 border">
-      <div className="flex-1 relative">
+    <div className="flex border-primary-800 border flex-col lg:flex-row">
+      <div className="flex-auto relative w-full h-[100%] lg:hidden">
+        <Image
+          src={image}
+          alt={`Cabin ${name}`}
+          className="object-cover border-r border-primary-800"
+          layout="responsive"
+          width={500}
+          height={100}
+        />
+      </div>
+
+      <div className="hidden lg:flex flex-1 relative w-full">
         <Image
           src={image}
           fill

@@ -36,7 +36,7 @@ function DateSelector({ settings, cabin, bookedDates }) {
   return (
     <div className="flex flex-col justify-between">
       <DayPicker
-        className="pt-12 place-self-center rdp"
+        className="pt-12 place-self-center rdp w-[80%] lg:w-auto"
         mode="range"
         min={minBookingLength + 1}
         max={maxBookingLength}
@@ -55,8 +55,8 @@ function DateSelector({ settings, cabin, bookedDates }) {
         }
       />
 
-      <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
-        <div className="flex items-baseline gap-6">
+      <div className="flex w-full flex-col lg-flex-row items-center gap-2 justify-between px-8 py-4 bg-accent-500 text-primary-800 h-[50%] lg:h-[72px]">
+        <div className="flex w-full items-center lg:items-baseline gap-4 lg:gap-6 flex-col lg:flex-row">
           <p className="flex gap-2 items-baseline">
             {discount > 0 ? (
               <>
@@ -72,12 +72,16 @@ function DateSelector({ settings, cabin, bookedDates }) {
           </p>
           {numNights ? (
             <>
-              <p className="bg-accent-600 px-3 py-2 text-2xl">
+              <p className="bg-accent-600 px-3 py-2 text-lg lg:text-2xl">
                 <span>&times;</span> <span>{numNights}</span>
               </p>
               <p>
-                <span className="text-lg font-bold uppercase">Total</span>{" "}
-                <span className="text-2xl font-semibold">${cabinPrice}</span>
+                <span className="text-base lg:text-lg font-bold uppercase">
+                  Total
+                </span>{" "}
+                <span className="text-lg lg:text-2xl font-semibold">
+                  ${cabinPrice}
+                </span>
               </p>
             </>
           ) : null}

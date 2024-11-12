@@ -1,4 +1,22 @@
-# NEXT.JS
+# THE WILD OASIS NEXT.JS
+
+## Canlı versiyon : <a href="https://the-wild-oasis-web-app-next-js.vercel.app/">THE WILD OASIS</a>
+
+- Next.Js ve React ile oluşturulmuş bir web uygulamasıdır. Müşterilerin harika bir tatil geçirebilecekleri bungalovları, rezerve edebilecekleri bir uygulamadır. Müşteriler, rezervasyon işlemlerini google ile oturum açarak gerçekleştirirler.
+
+## 🛠 Kullanılan Teknolojiler:
+
+- React
+- Next.JS
+- Tailwind CSS
+- Supabase
+- Heroicons
+- React-day-picker
+- date-fns
+- React-modern-drawer
+- Google Provider
+
+# NEXT.JS (Özet)
 
 ## NEXT.JS NEDİR?
 
@@ -292,7 +310,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
   - router.refresh, cookies.set veya cookies.delete'de yine Server Action'da revalidate için kullanılabilir.
   - Vazgeçmek veya iptal etmek için herhangi bir yöntem yoktur.
 
-## Server ve Client Arasındaki İletişim (Server Client Boundary -Frontend & Backend)
+## Server ve Client Arasındaki İletişim (Server Client Boundary - Frontend & Backend)
 
 ### Geleneksel İletişim (Traditional):
 
@@ -336,7 +354,6 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 - Context api, client componentler için çalışır. Çünkü bunlar contextten verileri okumak için gerekli hookları kullanabilir.<br/>
   <img src="/readme_img/contextAPI.png" alt="searchParams" width="50%"/>
-
 
 #### Route Handlers ile API Endpoint oluşturma
 
@@ -451,12 +468,12 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 - `revalidatePath("/account/reservations")`
 - **useTransition**:Spinner göstermenin useFormStatus dışında bir diğer yolu da useTransition() kullanmaktır.startTransition ile işlevi sararak isPending ile spinnerı kondisyonel olarak renderlayabiliriz. Yani, Bir state güncellemesini sözde bir transition olarak işaretlememizi sağlar. Ve bir state güncellemesi useTransition hooku kullanılarak bir transition olarak işaretlendiğinde bu state güncellemesi kullanıcı arayüzünü engellemeden gerçekleşecektir. Bu da kullanıcı arayüzünün yeniden oluşturma sırasında duyarlı kalacağı anlamına gelir ve ayrıca state transition gerçekleştiğine dair bir gösterge alırız. Reactta kullanıcı arayüzünü engelleyebilecek çok çok state güncellemeleri için yararlı olabilir.
 
-# Redirect
+## Redirect
 
 - Sayfa yönlendirme için redirect kullanabiliriz:
 - `redirect("/account/reservations")`:
 
-# useOptimistic Hook
+## useOptimistic Hook
 
 - Kullanıcı arayüzünün algılanan performansını artırmak için kullanabileceğimiz, kullanıcı deneyimini arttırmak için bir trick ve tekniktir. Belirli bir async işlemin henüz tamamlanmadan, yani arka planda çalışmaya devam ederken başarılı olacağını varsaymamızdan dolayı optimistic diyoruz.Yani genellikle bir async işlemin başarısız olma ihtimalinin düşük olduğu durumlarda tercih edilir, böylece kullanıcı daha hızlı bir deneyim yaşar.
 - useOptimistic () bir hook olduğundan client bir componentte kullanmalıyız.
@@ -466,7 +483,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
   - useOptimistic ten alınan değerlerin ilki optimistic state, başlangıçta ve o anda çalışan bir async action yokken döndürülecek olan durumdur; ikinci ise setter function dır. Kullanıcı delete butonuna her tıkladığında kullanılacak fonksiyondur. Böylece durum sayfadan hemen kaybolacaktır.
     - <img src="/readme_img/useOptimisticHook.png" alt="useOptimisticHook" width="50%">
 
-# bind() methodu:
+## bind() methodu:
 
 - Formdan gelen verilere action dan erişebiliyorduk. Form dışındaki verilere erişmek için gizli inputlar ekliyorduk. Eğer veriler çok ise **bind() methodu**nu kullanabiliriz.
   - <img src="/readme_img/bindMethodUsing.png" alt="bindMethodUse" width="50%">

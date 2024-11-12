@@ -26,10 +26,10 @@ function ReservationForm({ cabin, user }) {
 
   return (
     <div className="scale-[1.01]">
-      <div className="bg-primary-800 text-primary-300 px-16 py-2 flex justify-between items-center">
+      <div className="bg-primary-800 text-primary-300 px-2 lg:px-16 py-2 flex justify-between items-center text-sm lg:text-base">
         <p>Logged in as</p>
 
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-2 lg:gap-4 items-center">
           <img
             // Important to display google profile images
             referrerPolicy="no-referrer"
@@ -48,14 +48,16 @@ function ReservationForm({ cabin, user }) {
           await createBookingWithData(formData);
           resetRange();
         }}
-        className="bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col"
+        className="bg-primary-900 py-5 lg:py-10 px-4 lg:px-16 text-lg flex gap-5 flex-col"
       >
         <div className="space-y-2">
-          <label htmlFor="numGuests">How many guests?</label>
+          <label htmlFor="numGuests" className="text-sm lg:text-base">
+            How many guests?
+          </label>
           <select
             name="numGuests"
             id="numGuests"
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm text-sm lg:text-base"
             required
           >
             <option value="" key="">
@@ -70,20 +72,20 @@ function ReservationForm({ cabin, user }) {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="observations">
+          <label htmlFor="observations" className="text-sm lg:text-base">
             Anything we should know about your stay?
           </label>
           <textarea
             name="observations"
             id="observations"
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm text-sm lg:text-base"
             placeholder="Any pets, allergies, special requirements, etc.?"
           />
         </div>
 
         <div className="flex justify-end items-center gap-6">
           {!(startDate && endDate) ? (
-            <p className="text-primary-300 text-base">
+            <p className="text-primary-300 text-sm lg:text-base">
               Start by selecting dates
             </p>
           ) : (
