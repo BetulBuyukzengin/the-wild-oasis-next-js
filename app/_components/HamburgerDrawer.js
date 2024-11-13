@@ -9,7 +9,7 @@ function HamburgerDrawerCustom({ children }) {
   const toggleDrawer = () => setOpen((open) => !open);
 
   return (
-    <span className="w-[50%] md:hidden z-50">
+    <span className="w-[50%] md:hidden z-50 absolute">
       <Sling
         label="appSidebar"
         rounded
@@ -30,7 +30,8 @@ function HamburgerDrawerCustom({ children }) {
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
-          gap: "4rem",
+          gap: "3rem",
+          width: "15rem",
         }}
       >
         <span className="absolute top-0 right-0">

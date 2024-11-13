@@ -19,7 +19,7 @@ function ReservationList({ bookings }) {
     await deleteReservation(bookingId);
   }
   return (
-    <ul className="space-y-6">
+    <ul className="space-y-6 flex flex-col justify-center items-center ">
       {optimisticBookings.map((booking) => (
         <ReservationCard
           onDelete={handleDelete}

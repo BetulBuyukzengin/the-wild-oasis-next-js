@@ -15,7 +15,7 @@ export default function Filter() {
 
   const activeFilter = searchParams.get("capacity") ?? "all";
   return (
-    <div className="border border-primary-800 flex flex-col md:flex-row w-[70%] md:w-full">
+    <div className="border border-primary-800 flex flex-col md:flex-row w-full md:w-auto">
       <Button
         filter="all"
         handleFilter={handleFilter}

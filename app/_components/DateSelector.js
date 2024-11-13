@@ -9,6 +9,7 @@ import {
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { useReservation } from "./ReservationContext";
+import { useMediaQuery } from "usehooks-ts";
 
 //! Prevent from selecting booked dates-1
 function isAlreadyBooked(range, datesArr) {
@@ -28,26 +29,25 @@ function DateSelector({ settings, cabin, bookedDates }) {
   const { regularPrice, discount } = cabin;
   const numNights = differenceInDays(displayRange.to, displayRange.from);
   const cabinPrice = numNights * (regularPrice - discount);
+  const isLargeScreen = useMediaQuery("(min-width:768px)");
 
-  // SETTINGS
   const minBookingLength = 1;
   const maxBookingLength = 23;
 
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex flex-col justify-center md:justify-between">
       <DayPicker
-        className="pt-12 place-self-center rdp w-[80%] lg:w-auto"
+        className="md:p-12 place-self-center rdp md:w-auto text-sm"
         mode="range"
         min={minBookingLength + 1}
         max={maxBookingLength}
-        // onSelect={(range) => setRange(range)}
         onSelect={setRange}
         selected={displayRange}
         fromMonth={new Date()}
         fromDate={new Date()}
         toYear={new Date().getFullYear() + 5}
         captionLayout="dropdown"
-        numberOfMonths={2}
+        numberOfMonths={isLargeScreen ? 2 : 1}
         //! Prevent from selecting booked dates-3
         disabled={(curDate) =>
           isPast(curDate) ||
@@ -55,8 +55,8 @@ function DateSelector({ settings, cabin, bookedDates }) {
         }
       />
 
-      <div className="flex w-full flex-col lg-flex-row items-center gap-2 justify-between px-8 py-4 bg-accent-500 text-primary-800 h-[50%] lg:h-[72px]">
-        <div className="flex w-full items-center lg:items-baseline gap-4 lg:gap-6 flex-col lg:flex-row">
+      <div className="flex w-full flex-col lg:flex-row items-center gap-2 justify-between px-2 lg:px-8 py-4 bg-accent-500 text-primary-800 h-[50%] lg:h-[72px]">
+        <div className="flex w-full items-center lg:items-baseline gap-4 lg:gap-6 flex-row justify-center">
           <p className="flex gap-2 items-baseline">
             {discount > 0 ? (
               <>

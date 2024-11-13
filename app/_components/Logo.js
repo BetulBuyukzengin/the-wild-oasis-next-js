@@ -1,6 +1,6 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/public/logo.png";
 
 function Logo() {
   return (
@@ -8,14 +8,7 @@ function Logo() {
       href="/"
       className="flex flex-col md:flex-row items-center gap-4 z-10"
     >
-      <Image src="/logo.png" height="60" width="60" alt="The Wild Oasis Logo" />
-      {/* <Image
-        src={logo}
-        height="60"
-        width="60"
-        quality={100}
-        alt="The Wild Oasis Logo"
-      /> */}
+      <Image src="/logo.png" height="80" width="80" alt="The Wild Oasis Logo" />
 
       <span className="text-xl font-semibold text-primary-100">
         The Wild Oasis

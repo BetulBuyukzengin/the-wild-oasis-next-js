@@ -38,12 +38,15 @@
   --rdp-range_middle-background-color: theme("colors.accent.500") !important;
   margin: 0 !important;
 }
-.rdp-month {
-  width: 100%;
-}
 
-@media (min-width: 1024px) {
+@media (max-width: 768px) {
+  .rdp-months {
+    font-size: 0.8rem;
+  }
   .rdp-month {
-    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }

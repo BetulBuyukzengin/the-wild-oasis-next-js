@@ -11,8 +11,8 @@ export default async function About() {
   const cabins = await getCabins();
 
   return (
-    <div className="grid grid-cols-4 lg:grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
-      <div className="col-span-4 lg:col-span-3 ">
+    <div className="grid grid-cols-4 lg:grid-rows-[auto] lg:grid-cols-5 lg:gap-x-24 gap-y-8 lg:gap-y-32 text-lg lg:items-center">
+      <div className="col-span-4 row-start-1 lg:row-start-auto lg:col-span-3 h-max">
         <h1 className="text-2xl lg:text-4xl mb-10 text-accent-400 font-medium">
           Welcome to The Wild Oasis
         </h1>
@@ -39,7 +39,7 @@ export default async function About() {
         </div>
       </div>
 
-      <div className="col-span-4 lg:col-span-2">
+      <div className="col-span-4 lg:col-span-2  row-start-2 lg:row-start-auto h-max">
         {/* To have a sensitive image. */}
         <Image
           className="pr-4"
@@ -50,7 +50,7 @@ export default async function About() {
         />
       </div>
 
-      <div className="relative aspect-square col-span-4 lg:col-span-2">
+      <div className="relative aspect-square col-span-4 lg:col-span-2  row-start-4 lg:row-start-auto h-max">
         {/* For any image available on the computer. */}
         <Image
           src="/about-2.jpg"
@@ -60,7 +60,7 @@ export default async function About() {
         />
       </div>
 
-      <div className="col-span-4 lg:col-span-3 items-center">
+      <div className="col-span-4 lg:col-span-3 items-center  row-start-3 lg:row-start-auto h-max">
         <h1 className="text-2xl lg:text-4xl mb-10 text-accent-400 font-medium">
           Managed by our family since 1962
         </h1>
