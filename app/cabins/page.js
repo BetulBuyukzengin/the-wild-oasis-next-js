@@ -8,8 +8,9 @@ export const metadata = {
   title: "Cabins",
 };
 
-//! Convert to dynamic - ISR (Middle ground between static and dynamic)
+//! Convert to dynamic
 // export const revalidate = 0;
+//! ISR (Middle ground between static and dynamic)
 // export const revalidate = 3600; //seconds
 
 export default function Cabins({ searchParams }) {
