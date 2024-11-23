@@ -164,7 +164,7 @@ Bir dom ağacında server altında client ya da server bileşeni yer alabilir. C
 
 ## NEXT.JS PROJESİ OLUŞTURURKEN ADIMLAR:
 
-- npx create-next-app@latest projectName
+- npx create-next-app@latest 
 - App router'da oluşturduğumuz her bir klasör ismi bir pathname olarak kullanılır ve her klasör içerisinde o pathname ile eşleşen bir page.js modülü oluşturmalıyız.
 - Oluşturduğumuz bir klasörün pathname olarak algılanmasından kaçınmak için `_components` şeklinde bir tanımlama yapabiliriz. Böylece components adında bir path oluşturulmaz.
 - Yönlendirme `<Link href="/cabins">cabin</Link>`şeklinde kullanılır.
